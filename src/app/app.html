@@ -1,0 +1,935 @@
+<div class="app-layout" [class.dark-theme]="isDarkMode()">
+  <!-- TOP URGENT LINE BANNER -->
+  <aside class="urgent-banner">
+    <div class="container urgent-container">
+      <div class="urgent-badge">สำคัญมาก</div>
+      <div class="urgent-text">
+        <strong>รูปแบบจริง: สัมภาษณ์ผ่านโทรศัพท์ / LINE VDO Call</strong>
+        <span>• สแกน QR Code เข้ากลุ่ม LINE <strong>"04 สัมภาษณ์ โควตา 70"</strong> และแจ้ง <strong>"ชื่อ - นามสกุล"</strong> ทันที</span>
+      </div>
+      <span class="urgent-time">เริ่มโทร 09.00 น. (17 ต.ค.)</span>
+    </div>
+  </aside>
+
+  <!-- APP HEADER -->
+  <header class="app-header">
+    <div class="container header-container">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title-wrap">
+            <h1 class="brand-title">พร้อมเสมอ</h1>
+            <span class="badge badge-brand">ดักฟังเสียง & ปุ่มลัดคำตอบ</span>
+          </div>
+          <p class="brand-subtitle">วศ.บ.คอมพิวเตอร์ (เทียบโอน) • มทร.ธัญบุรี รอบโควตา</p>
+        </div>
+      </div>
+
+      <!-- Header Controls: Theme Toggle & Readiness Bar -->
+      <div class="header-right-group">
+        <button
+          type="button"
+          class="theme-toggle-btn"
+          (click)="toggleTheme()"
+          [title]="isDarkMode() ? 'เปลี่ยนเป็นธีมสว่าง' : 'เปลี่ยนเป็นธีมมืด (อ่านง่าย สบายตา)'">
+          @if (isDarkMode()) {
+            <span>☀️ ธีมสว่าง</span>
+          } @else {
+            <span>🌙 ธีมมืด</span>
+          }
+        </button>
+
+        <div class="header-readiness">
+          <div class="readiness-text">
+            <span class="readiness-label">ความจำขึ้นใจ</span>
+            <span class="readiness-percent" [class.ready-full]="overallReadinessPercent() === 100">{{ overallReadinessPercent() }}%</span>
+          </div>
+          <div class="readiness-bar-bg">
+            <div class="readiness-bar-fill" [style.width.%]="overallReadinessPercent()"></div>
+          </div>
+          <span class="readiness-sub">ท่องจำแล้ว {{ preparedQuestionsCount() }}/{{ totalQuestionsCount() }} ข้อ</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CANDIDATE PROFILE BAR (ข้อมูลผู้สมัครสอบสัมภาษณ์จริง) -->
+  <section class="candidate-bar-section">
+    <div class="container">
+      <div class="candidate-card">
+        <div class="candidate-avatar">
+          <span>พ</span>
+        </div>
+        <div class="candidate-main-info">
+          <div class="candidate-title-line">
+            <span class="candidate-name">{{ candidateProfile.name }}</span>
+            <span class="candidate-tag-badge">รหัสผู้สอบ: {{ candidateProfile.examId }}</span>
+            <span class="candidate-order-badge">ลำดับที่ {{ candidateProfile.orderNum }}</span>
+            <span class="candidate-github-badge">GitHub: {{ candidateProfile.github }}</span>
+          </div>
+          <div class="candidate-sub-line">
+            <span>🎓 {{ candidateProfile.prevCollege }} ({{ candidateProfile.prevMajor }})</span>
+            <span class="divider">•</span>
+            <span>🏛️ เป้าหมาย: <strong>{{ candidateProfile.majorName }}</strong></span>
+            <span class="divider">•</span>
+            <span>🏢 ฝึกงาน: <strong>{{ candidateProfile.internship }}</strong></span>
+          </div>
+        </div>
+        <div class="candidate-callout">
+          <span class="callout-date">📅 {{ candidateProfile.interviewDate }}</span>
+          <span class="callout-highlight">🚀 พร้อมสัมภาษณ์ 100%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE & 1-CLICK ASSISTANT HUD (ระบบดักฟังเสียง & ปุ่มลัดดึงคำตอบทันที) -->
+  <section class="voice-hud-section">
+    <div class="container">
+      <div class="voice-hud-card" [class.active-listening]="isListening()">
+        <div class="voice-hud-main">
+          
+          <!-- Top Row: Voice Controls & Real-Time Audio Proof -->
+          <div class="voice-controls-row">
+            <div class="voice-status-group">
+              <button
+                type="button"
+                class="btn-voice-toggle"
+                [class.is-recording]="isListening()"
+                (click)="toggleSpeechListening()">
+                @if (isListening()) {
+                  <span class="pulse-dot"></span>
+                  <span>🔴 กำลังดักฟังเสียง (กดเพื่อหยุด)</span>
+                } @else {
+                  <span>🎤 เปิดระบบดักฟังเสียงคำถาม (Auto-Search)</span>
+                }
+              </button>
+
+              <!-- Live Audio Detection Badge (บอกชัดเจนว่าอัดเสียงติดหรือไม่) -->
+              <div class="mic-status-pill" [class.sound-active]="isListening() && isSoundDetected()" [class.waiting]="isListening() && !isSoundDetected()">
+                @if (isListening() && isSoundDetected()) {
+                  <span class="live-pulse-green"></span>
+                  <strong>🟢 อัดเสียงติดแล้ว! (ตรวจพบเสียงสด)</strong>
+                } @else if (isListening()) {
+                  <span class="live-pulse-yellow"></span>
+                  <span>🟡 ไมค์เปิดอยู่ รอรับเสียง... (ลองพูดคีย์เวิร์ด)</span>
+                } @else {
+                  <span>⚪ ไมค์ปิดอยู่ (กดปุ่มเปิดเพื่อเริ่ม)</span>
+                }
+              </div>
+
+              <!-- Animated Sound Wave VU Meter -->
+              @if (isListening()) {
+                <div class="sound-wave-bars" [class.animated]="micVolumeLevel() > 6 || speechTranscript()">
+                  <span class="sound-bar bar-1" [style.height.px]="4 + (micVolumeLevel() * 0.25)"></span>
+                  <span class="sound-bar bar-2" [style.height.px]="6 + (micVolumeLevel() * 0.35)"></span>
+                  <span class="sound-bar bar-3" [style.height.px]="10 + (micVolumeLevel() * 0.45)"></span>
+                  <span class="sound-bar bar-4" [style.height.px]="6 + (micVolumeLevel() * 0.35)"></span>
+                  <span class="sound-bar bar-5" [style.height.px]="4 + (micVolumeLevel() * 0.25)"></span>
+                  <span class="sound-vol-text">{{ micVolumeLevel() }}%</span>
+                </div>
+              }
+            </div>
+
+            <!-- Right: Explainer Guide Button & Time -->
+            <div class="voice-right-controls">
+              @if (lastSoundTime()) {
+                <span class="last-sound-time">จับเสียงล่าสุด: {{ lastSoundTime() }}</span>
+              }
+              <button type="button" class="btn-how-it-works" (click)="toggleHowItWorks()">
+                💡 ดักเสียงอาจารย์ยังไง? (กดดู)
+              </button>
+            </div>
+          </div>
+
+          <!-- COLLAPSIBLE GUIDE: HOW AUDIO INTERCEPTION WORKS -->
+          @if (showHowItWorks()) {
+            <div class="how-it-works-box animate-fade-in">
+              <div class="how-header">
+                <h4>💡 ระบบดักเสียงอาจารย์ทำงานอย่างไร? (เลือกใช้ตามความสะดวก 4 วิธี)</h4>
+                <button type="button" class="btn-close-how" (click)="showHowItWorks.set(false)">✕ ปิดคำแนะนำ</button>
+              </div>
+              <div class="how-grid">
+                <div class="how-card">
+                  <div class="how-num">1</div>
+                  <h5>เปิดสปีกเกอร์โฟน (ง่ายและดีที่สุด)</h5>
+                  <p>ถ้าสัมภาษณ์ทางโทรศัพท์มือถือ ให้กด <strong>"เปิดลำโพง (Speakerphone)"</strong> วางมือถือข้างคีย์บอร์ด ไมค์คอมจะรับเสียงอาจารย์โดยตรงและขึ้นตัวหนังสือสดทันที</p>
+                </div>
+                <div class="how-card">
+                  <div class="how-num">2</div>
+                  <h5>สัมภาษณ์ผ่าน LINE PC บนคอม</h5>
+                  <p>ถ้าอาจารย์ VDO Call ทาง LINE ให้รับสายในโปรแกรม LINE บนคอมพิวเตอร์เครื่องนี้เลย ไมค์และเสียงอาจารย์จะอยู่ในเครื่องเดียวกัน 100%</p>
+                </div>
+                <div class="how-card">
+                  <div class="how-num">3</div>
+                  <h5>ถ้าใส่หูฟัง (ไมค์คอมไม่ได้ยินในหู)</h5>
+                  <p>ให้คุณ <strong>"ทวนคำถามอาจารย์ด้วยเสียงตัวเองสั้นๆ"</strong> เช่น <em>"อาจารย์ถามเรื่องโปรเจกต์ใช่ไหมครับ..."</em> หรือ <em>"เรื่อง OOP ใช่ไหมครับ..."</em> ไมค์คอมจะจับเสียงปากคุณแล้วดึงคำตอบขึ้นมาทันที!</p>
+                </div>
+                <div class="how-card">
+                  <div class="how-num">4</div>
+                  <h5>ปุ่มลัดคลิกเดียว (เร็ว & ชัวร์ 100%)</h5>
+                  <p>กดปุ่มคีย์เวิร์ดด้านล่าง เช่น <strong>[แนะนำตัว] [ทำไมเลือก มทร.] [OOP] [เกรดน้อย]</strong> คำตอบจะเด้งขึ้นมาใน 0.1 วินาที ไม่ต้องลุ้นเสียงสะท้อน</p>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!-- Error Alert / Permission Hint -->
+          @if (speechError()) {
+            <div class="speech-error-box animate-fade-in">
+              <p>{{ speechError() }}</p>
+            </div>
+          }
+
+          <!-- Real-Time Live Transcript Display (ข้อความที่ไมค์ได้ยินสด) -->
+          @if (speechTranscript()) {
+            <div class="transcript-box animate-fade-in" [class.has-sound]="isSoundDetected()">
+              <div class="transcript-header-row">
+                <span class="transcript-tag">🗣️ ข้อความที่ไมค์ได้ยินสด:</span>
+                <span class="transcript-confirmed">🟢 อัดเสียงติดแล้ว (กำลังจับคำตอบ)</span>
+              </div>
+              <p class="transcript-content">"{{ speechTranscript() }}"</p>
+              <button type="button" class="btn-clear-transcript" (click)="clearSpeechData()">✕ ล้าง</button>
+            </div>
+          }
+
+          <!-- 1-CLICK QUICK SHORTCUT CHIPS (ปุ่มลัดคลิกเดียว คำตอบเด้งทันที!) -->
+          <div class="quick-chips-wrapper">
+            <span class="chips-label">⚡ หรือกดปุ่มลัด 1 คลิก (คำตอบเด้งทันที ไม่ต้องพูด):</span>
+            <div class="chips-list">
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(1)">👤 1. แนะนำตัว (100%)</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(2)">🏫 2. ทำไมเลือก มทร. (100%)</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(3)">✅ 3. ถ้าติดเอาไหม (100%)</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(4)">💻 4. โปรเจกต์ ปวส.</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(5)">👥 5. ในกลุ่มกี่คน</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(7)">⌨️ 7. ภาษาโค้ด</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(8)">📐 8. คำนวณ/เลข</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(10)">🎯 10. อาชีพเป้าหมาย</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('OOP')">🤖 OOP 4 เสาหลัก</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Database SQL vs NoSQL')">🤖 Database SQL</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Network TCP vs UDP')">🤖 Network TCP</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ทำไมเกรดน้อย')">🤖 ทำไมเกรดน้อย</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ทะเลาะกับเพื่อนในกลุ่ม')">🤖 ทะเลาะกับเพื่อน</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AUTO-MATCHED POPUP CARD 1: สำหรับคำถามหลัก 1-12 ข้อ -->
+        @if (speechMatchedQuestion()) {
+          <div class="matched-answer-box animate-fade-in">
+            <div class="matched-header">
+              <span class="badge badge-matched">🎯 คำตอบพร้อมพูดทันที (คำถามหลัก)!</span>
+              <button type="button" class="btn-close-matched" (click)="speechMatchedQuestion.set(null)">✕ ปิดหน้าต่างนี้</button>
+            </div>
+            <h4 class="matched-q-title">#{{ speechMatchedQuestion()?.id }}. {{ speechMatchedQuestion()?.question }}</h4>
+            <div class="matched-hook">
+              🎯 สูตรจำ: <strong>{{ speechMatchedQuestion()?.keywordHook }}</strong>
+            </div>
+            <div class="matched-punchline">
+              <span class="matched-label">🗣️ อ่านประโยคนี้ตอบอาจารย์ได้ทันที:</span>
+              <p class="matched-speech">"{{ speechMatchedQuestion()?.punchline }}"</p>
+            </div>
+            <div class="matched-never">
+              🚫 สิ่งที่ห้ามพูด: {{ speechMatchedQuestion()?.neverSay }}
+            </div>
+          </div>
+        }
+
+        <!-- AUTO-MATCHED POPUP CARD 2: สำหรับผู้ช่วย AI บอกทีละประโยค (สำหรับคำถามนอกเหนือ) -->
+        @if (speechAiAnswer()) {
+          <div class="ai-teleprompter-card animate-fade-in">
+            <div class="ai-tele-header">
+              <div class="ai-badge-group">
+                <span class="badge badge-ai-gold">🤖 AI ผู้ช่วยฉุกเฉิน (บอกบทตอบทีละประโยค)</span>
+                <span class="badge badge-category">{{ speechAiAnswer()?.categoryLabel }}</span>
+              </div>
+              <div class="ai-tele-actions">
+                <button type="button" class="btn-copy-all" (click)="copyFullAiAnswer(speechAiAnswer()!)">
+                  @if (copiedSentenceIndex() === 999) {
+                    <span>✓ คัดลอกทั้ง 3 ประโยคแล้ว!</span>
+                  } @else {
+                    <span>📋 คัดลอกทั้ง 3 ประโยค</span>
+                  }
+                </button>
+                <button type="button" class="btn-close-matched" (click)="speechAiAnswer.set(null)">✕ ปิดหน้าต่างนี้</button>
+              </div>
+            </div>
+
+            <h3 class="ai-tele-title">คำถาม: {{ speechAiAnswer()?.topic }}</h3>
+
+            <div class="sentences-grid">
+              <!-- ประโยคที่ 1 -->
+              <div class="sentence-card">
+                <div class="sentence-index">1</div>
+                <div class="sentence-content">
+                  <div class="sentence-tag">ประโยคเปิด (รับคำถาม & ยืนยันความมั่นใจ):</div>
+                  <p class="sentence-text">"{{ speechAiAnswer()?.sentence1 }}"</p>
+                </div>
+                <button type="button" class="btn-copy-sub" (click)="copySentence(speechAiAnswer()!.sentence1, 1)">
+                  {{ copiedSentenceIndex() === 1 ? '✓ คัดลอกแล้ว' : '📋 คัดลอก' }}
+                </button>
+              </div>
+
+              <!-- ประโยคที่ 2 -->
+              <div class="sentence-card">
+                <div class="sentence-index">2</div>
+                <div class="sentence-content">
+                  <div class="sentence-tag">ประโยคเนื้อหา (เชื่อมโยงประสบการณ์ ปวส. / ทฤษฎีจริง):</div>
+                  <p class="sentence-text">"{{ speechAiAnswer()?.sentence2 }}"</p>
+                </div>
+                <button type="button" class="btn-copy-sub" (click)="copySentence(speechAiAnswer()!.sentence2, 2)">
+                  {{ copiedSentenceIndex() === 2 ? '✓ คัดลอกแล้ว' : '📋 คัดลอก' }}
+                </button>
+              </div>
+
+              <!-- ประโยคที่ 3 -->
+              <div class="sentence-card">
+                <div class="sentence-index">3</div>
+                <div class="sentence-content">
+                  <div class="sentence-tag">ประโยคปิด (ตอกย้ำความมุ่งมั่น & ความพร้อมเรียนที่นี่):</div>
+                  <p class="sentence-text">"{{ speechAiAnswer()?.sentence3 }}"</p>
+                </div>
+                <button type="button" class="btn-copy-sub" (click)="copySentence(speechAiAnswer()!.sentence3, 3)">
+                  {{ copiedSentenceIndex() === 3 ? '✓ คัดลอกแล้ว' : '📋 คัดลอก' }}
+                </button>
+              </div>
+            </div>
+
+            @if (speechAiAnswer()?.quickTips) {
+              <div class="ai-tele-tips">
+                💡 <strong>เทคนิคเฉพาะข้อนี้:</strong> {{ speechAiAnswer()?.quickTips }}
+              </div>
+            }
+          </div>
+        }
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY STRIP (4 STATS) -->
+  <section class="summary-strip">
+    <div class="container strip-grid">
+      <div class="strip-item">
+        <span class="strip-label">วันสอบสัมภาษณ์</span>
+        <strong class="strip-val text-primary">เสาร์ 17 ต.ค. 69</strong>
+        <span class="strip-sub">รอสาย 08.30 น. (เริ่ม 09.00)</span>
+      </div>
+      <div class="strip-item">
+        <span class="strip-label">รูปแบบการสอบ</span>
+        <strong class="strip-val text-accent">โทรศัพท์ / LINE VDO Call</strong>
+        <span class="strip-sub">อาจารย์เป็นฝ่ายติดต่อมาเอง</span>
+      </div>
+      <div class="strip-item">
+        <span class="strip-label">ผู้มีสิทธิ์ในสาขา</span>
+        <strong class="strip-val">43 คน</strong>
+        <span class="strip-sub">วศ.บ.คอมฯ เทียบโอน</span>
+      </div>
+      <div class="strip-item">
+        <span class="strip-label">วันประกาศผล</span>
+        <strong class="strip-val text-success">พุธ 28 ต.ค. 69</strong>
+        <span class="strip-sub">ที่ oreg.rmutt.ac.th</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="tabs-nav-wrapper">
+    <div class="container">
+      <div class="tabs-nav">
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab() === 'cheat'"
+          (click)="setActiveTab('cheat')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>⚡ โพยจำสั้น 1 บรรทัด (แก้ไขได้)</span>
+          <span class="tab-pill">{{ preparedQuestionsCount() }}/{{ totalQuestionsCount() }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab() === 'ai-assistant'"
+          (click)="setActiveTab('ai-assistant')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path>
+            <rect x="3" y="8" width="18" height="12" rx="2"></rect>
+            <circle cx="9" cy="14" r="1.5"></circle>
+            <circle cx="15" cy="14" r="1.5"></circle>
+            <line x1="9" y1="18" x2="15" y2="18"></line>
+          </svg>
+          <span>🤖 AI ผู้ช่วยประโยคทอง</span>
+          <span class="tab-pill badge-ai-tab">ค้นหาได้ทุกเรื่อง</span>
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab() === 'checklist'"
+          (click)="setActiveTab('checklist')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <span>📱 เช็กลิสต์วันจริง (LINE & เอกสาร)</span>
+          <span class="tab-pill">{{ completedChecklistCount() }}/{{ totalChecklistCount() }}</span>
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab() === 'mock'"
+          (click)="setActiveTab('mock')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>⏱️ ห้องซ้อมพูดสั้น (45 วิ)</span>
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          [class.active]="activeTab() === 'official'"
+          (click)="setActiveTab('official')">
+          <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>📜 ข้อมูลประกาศ มทร.ธัญบุรี</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container main-content animate-fade-in">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: EDITABLE ULTRA-SHORT CHEAT SHEET   -->
+    <!-- ========================================== -->
+    @if (activeTab() === 'cheat') {
+      <div class="cheat-section">
+        <!-- Action & Filter Bar -->
+        <div class="filter-card">
+          <div class="filter-top-row">
+            <div class="search-box-wrap">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="🔍 ค้นหาคำถาม หรือคำในประโยคตอบ..."
+                [ngModel]="searchQuery()"
+                (ngModelChange)="searchQuery.set($event)" />
+              @if (searchQuery()) {
+                <button type="button" class="search-clear-btn" (click)="searchQuery.set('')">✕</button>
+              }
+            </div>
+
+            <div class="custom-actions-wrap">
+              <button type="button" class="btn btn-sm btn-accent" (click)="addNewQuestion()">
+                ➕ เพิ่มคำถามของฉันเอง
+              </button>
+              <button type="button" class="btn btn-sm btn-secondary" (click)="resetAllToDefault()" title="คืนค่าคำถามทั้งหมดกลับเป็นค่าเริ่มต้น">
+                ⟲ คืนค่าเริ่มต้น
+              </button>
+            </div>
+          </div>
+
+          <div class="category-pills">
+            <button type="button" class="pill-btn" [class.active]="selectedCategory() === 'all'" (click)="setCategory('all')">
+              ทั้งหมด ({{ questions().length }})
+            </button>
+            <button type="button" class="pill-btn pill-btn-mandatory" [class.active]="selectedCategory() === 'intro'" (click)="setCategory('intro')">
+              🔥 เจอแน่นอน 100% (อันดับ 1-3)
+            </button>
+            <button type="button" class="pill-btn" [class.active]="selectedCategory() === 'project'" (click)="setCategory('project')">
+              โปรเจกต์ ปวส.
+            </button>
+            <button type="button" class="pill-btn" [class.active]="selectedCategory() === 'skills'" (click)="setCategory('skills')">
+              ทักษะคอมฯ & เลข
+            </button>
+            <button type="button" class="pill-btn" [class.active]="selectedCategory() === 'readiness'" (click)="setCategory('readiness')">
+              ความพร้อม & อนาคต
+            </button>
+            <button type="button" class="pill-btn" [class.active]="selectedCategory() === 'extra'" (click)="setCategory('extra')">
+              คำถามเสริม
+            </button>
+          </div>
+        </div>
+
+        <!-- Cards List -->
+        <div class="cheat-cards-grid">
+          @for (q of filteredQuestions(); track q.id) {
+            <article
+              class="cheat-card"
+              [class.is-prepared]="isQuestionPrepared(q.id)"
+              [class.card-mandatory-highlight]="q.importance === 'mandatory'">
+
+              <!-- Card Header -->
+              <div class="cheat-card-top">
+                <div class="q-badge-wrap">
+                  <span class="q-id">#{{ q.id }}</span>
+                  <span class="badge" [ngClass]="{
+                    'badge-mandatory-bold': q.importance === 'mandatory',
+                    'badge-high': q.importance === 'high',
+                    'badge-technical': q.importance === 'technical'
+                  }">{{ q.importanceLabel }}</span>
+                  <span class="cat-pill">{{ q.categoryLabel }}</span>
+                </div>
+
+                <div class="cheat-actions">
+                  @if (editingQuestionId() !== q.id) {
+                    <button
+                      type="button"
+                      class="btn-edit-action"
+                      (click)="startEditing(q)"
+                      title="กดเพื่อแก้ไขข้อความให้ตรงกับโปรเจกต์และข้อมูลของคุณ">
+                      ✏️ แก้ไขข้อความ
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn-copy-short"
+                      (click)="copyPunchline(q)"
+                      title="คัดลอกข้อความ">
+                      {{ copiedQuestionId() === q.id ? '✓ ก๊อปแล้ว' : 'คัดลอก' }}
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn-tick"
+                      [class.ticked]="isQuestionPrepared(q.id)"
+                      (click)="toggleQuestionPrepared(q.id)">
+                      {{ isQuestionPrepared(q.id) ? '✓ จำได้แล้ว' : '○ ยังจำไม่ได้' }}
+                    </button>
+                  }
+                </div>
+              </div>
+
+              <!-- VIEW MODE -->
+              @if (editingQuestionId() !== q.id) {
+                <!-- Question Title -->
+                <h3 class="cheat-question">{{ q.question }}</h3>
+
+                <!-- Hook / Memory Tag -->
+                <div class="hook-line">
+                  <span class="hook-label">🎯 สูตรจำ:</span>
+                  <strong class="hook-val">{{ q.keywordHook }}</strong>
+                </div>
+
+                <!-- Punchline / Spoken Answer -->
+                <div class="punchline-box">
+                  <span class="box-tag">🗣️ ประโยคตอบ (พูดปากเปล่าได้ทันที):</span>
+                  <p class="punchline-text">"{{ q.punchline }}"</p>
+                </div>
+
+                <!-- Never Say -->
+                <div class="never-say-line">
+                  <span class="never-tag">🚫 ห้ามพูด:</span>
+                  <span class="never-text">{{ q.neverSay }}</span>
+                </div>
+
+                @if (q.isCustom) {
+                  <div class="custom-card-footer">
+                    <button type="button" class="btn-text-danger" (click)="deleteQuestion(q.id)">ลบคำถามนี้</button>
+                  </div>
+                }
+              }
+
+              <!-- EDIT MODE (ฟังก์ชันแก้ไขข้อความตรงนี้) -->
+              @if (editingQuestionId() === q.id) {
+                <div class="edit-form-wrap">
+                  <div class="edit-field">
+                    <label class="edit-label">หัวข้อคำถาม:</label>
+                    <input
+                      type="text"
+                      class="edit-input"
+                      [ngModel]="editForm().question"
+                      (ngModelChange)="editForm.set({ ...editForm(), question: $event })" />
+                  </div>
+
+                  <div class="edit-field">
+                    <label class="edit-label">🎯 สูตรจำ (3 คำช่วยจำ):</label>
+                    <input
+                      type="text"
+                      class="edit-input"
+                      placeholder="เช่น ชื่อ + สถาบันเดิม + สิ่งที่ชอบ"
+                      [ngModel]="editForm().keywordHook"
+                      (ngModelChange)="editForm.set({ ...editForm(), keywordHook: $event })" />
+                  </div>
+
+                  <div class="edit-field">
+                    <label class="edit-label">🗣️ ประโยคตอบของคุณ (ปรับใส่ชื่อ, สถาบัน, เกรด, โปรเจกต์จริง):</label>
+                    <textarea
+                      rows="3"
+                      class="edit-textarea"
+                      placeholder="พิมพ์ประโยคตอบที่เหมาะกับตัวคุณเอง..."
+                      [ngModel]="editForm().punchline"
+                      (ngModelChange)="editForm.set({ ...editForm(), punchline: $event })"></textarea>
+                  </div>
+
+                  <div class="edit-field">
+                    <label class="edit-label">🚫 สิ่งที่ห้ามพูดเด็ดขาด:</label>
+                    <input
+                      type="text"
+                      class="edit-input"
+                      placeholder="ข้อห้ามหรือสิ่งที่หลีกเลี่ยง..."
+                      [ngModel]="editForm().neverSay"
+                      (ngModelChange)="editForm.set({ ...editForm(), neverSay: $event })" />
+                  </div>
+
+                  <div class="edit-actions-bar">
+                    <div class="left-actions">
+                      <button type="button" class="btn btn-sm btn-primary" (click)="saveEditing(q.id)">
+                        💾 บันทึกข้อมูล
+                      </button>
+                      <button type="button" class="btn btn-sm btn-secondary" (click)="cancelEditing()">
+                        ยกเลิก
+                      </button>
+                    </div>
+
+                    <button type="button" class="btn btn-sm btn-outline" (click)="resetSingleQuestion(q.id)" title="คืนค่าประโยคเริ่มต้นของข้อนี้">
+                      ⟲ คืนค่าเริ่มต้นข้อนี้
+                    </button>
+                  </div>
+                </div>
+              }
+
+            </article>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ========================================== -->
+    <!-- TAB 2: AI ASSISTANT (บอกทีละประโยค ค้นหาได้ทุกเรื่อง) -->
+    <!-- ========================================== -->
+    @if (activeTab() === 'ai-assistant') {
+      <div class="ai-section animate-fade-in">
+        <!-- AI Hero Header -->
+        <div class="ai-hero-card">
+          <div class="ai-hero-content">
+            <div class="ai-hero-badge">🤖 AI ตอบคำถามนอกเหนือทีละประโยค</div>
+            <h2 class="ai-hero-title">เตรียมพร้อมรับมือทุกคำถามที่อาจารย์อาจจะถาม</h2>
+            <p class="ai-hero-desc">
+              ไม่ว่าจะเป็นเรื่องเทคนิคคอมฯ (OOP, Database, Network, Git, Docker), เรื่องทัศนคติ (เกรดน้อย, ทะเลาะกับเพื่อน), หรือเรื่องความพร้อม (ค่าเทอม, ทำงานไปด้วย) 
+              ระบบได้เตรียม <strong>"โครงสร้าง 3 ประโยคทอง"</strong> ให้คุณพูดตอบได้อย่างมั่นใจและตรงใจคณะกรรมการ
+            </p>
+          </div>
+
+          <!-- Dynamic Live Question Search Bar -->
+          <div class="ai-search-container">
+            <div class="ai-input-wrap">
+              <span class="ai-search-icon">🔍</span>
+              <input
+                type="text"
+                class="ai-search-input"
+                placeholder="พิมพ์หัวข้อหรือคำถามที่ต้องการค้นหา (เช่น OOP, Git, เกรดน้อย, ค่าเทอม, ทำงานไปด้วย, หรือคำถามใดๆ)..."
+                [ngModel]="aiSearchQuery()"
+                (ngModelChange)="aiSearchQuery.set($event)"
+                (keyup.enter)="askAiAssistant()" />
+              @if (aiSearchQuery()) {
+                <button type="button" class="btn-clear-ai-search" (click)="aiSearchQuery.set('')">✕</button>
+              }
+            </div>
+            <button type="button" class="btn-ask-ai" (click)="askAiAssistant()">
+              ⚡ ค้นหา / ให้ AI แต่งประโยค
+            </button>
+          </div>
+
+          <!-- Fast Preset Prompt Pills -->
+          <div class="ai-pills-row">
+            <span class="pills-title">💡 หัวข้อยอดฮิตที่อาจารย์มักถาม:</span>
+            <div class="pills-flex">
+              <button type="button" class="ai-pill" (click)="askAiAssistant('OOP 4 เสาหลัก')">OOP 4 เสาหลัก</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Database SQL vs NoSQL')">SQL vs NoSQL</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Network TCP vs UDP')">Network TCP/UDP</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Git & GitHub')">Git & GitHub</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Docker & Container')">Docker</button>
+              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('ทำไมเกรดเฉลี่ย ปวส. น้อย')">ทำไมเกรดน้อย?</button>
+              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('เคยทะเลาะกับเพื่อนในกลุ่มโปรเจกต์ไหม')">ทะเลาะกับเพื่อน?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ทำงานไปด้วยเรียนไปด้วยได้ไหม')">ทำงานไปด้วยได้ไหม?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ถ้าวิชาคำนวณยากจะเรียนไหวไหม')">คำนวณไม่เก่ง?</button>
+              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('ถ้าไม่ผ่านรอบโควตานี้จะทำอย่างไร')">ถ้าไม่ติดรอบนี้?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('เรื่องค่าเทอมและค่าใช้จ่าย')">ค่าเทอม/กยศ.</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ทำไมเลือก มทร.ธัญบุรี ไม่เลือกพระจอม')">ทำไมเลือก มทร.ธัญบุรี?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('วิศวะคอมพิวเตอร์ต่างกับวิทยาการคอมอย่างไร')">CE ต่างจาก CS ยังไง?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Linux และ Command Line')">Linux / Command Line</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('API และ RESTful API')">RESTful API</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="ai-filter-tabs">
+          <button type="button" class="ai-filter-btn" [class.active]="selectedAiCategory() === 'all'" (click)="selectedAiCategory.set('all')">
+            ทั้งหมด ({{ filteredAiKnowledge().length }})
+          </button>
+          <button type="button" class="ai-filter-btn" [class.active]="selectedAiCategory() === 'tech'" (click)="selectedAiCategory.set('tech')">
+            💻 เทคนิคคอมฯ
+          </button>
+          <button type="button" class="ai-filter-btn" [class.active]="selectedAiCategory() === 'attitude'" (click)="selectedAiCategory.set('attitude')">
+            🧠 ทัศนคติ & แก้ปัญหา
+          </button>
+          <button type="button" class="ai-filter-btn" [class.active]="selectedAiCategory() === 'behavior'" (click)="selectedAiCategory.set('behavior')">
+            💼 ความพร้อมเรียน
+          </button>
+          <button type="button" class="ai-filter-btn" [class.active]="selectedAiCategory() === 'rmutt'" (click)="selectedAiCategory.set('rmutt')">
+            🏫 มทร.ธัญบุรี
+          </button>
+          <button type="button" class="ai-filter-btn" [class.active]="selectedAiCategory() === 'academic'" (click)="selectedAiCategory.set('academic')">
+            📐 วิชาการ & คำนวณ
+          </button>
+        </div>
+
+        <!-- Grid of AI Answers with 3-Sentence Teleprompter cards -->
+        <div class="ai-cards-grid">
+          @for (item of filteredAiKnowledge(); track item.id) {
+            <div class="ai-card animate-fade-in">
+              <div class="ai-card-top">
+                <span class="badge badge-category">{{ item.categoryLabel }}</span>
+                <button type="button" class="btn-copy-card" (click)="copyFullAiAnswer(item)" title="คัดลอกทั้ง 3 ประโยค">
+                  📋 คัดลอกทั้ง 3 ประโยค
+                </button>
+              </div>
+
+              <h3 class="ai-card-title">{{ item.topic }}</h3>
+
+              <div class="sentences-list">
+                <!-- Sentence 1 -->
+                <div class="sentence-item s1">
+                  <div class="s-header">
+                    <span class="s-badge">1️⃣ ประโยคเปิด (รับคำถาม):</span>
+                    <button type="button" class="btn-copy-mini" (click)="copySentence(item.sentence1, 1)">📋</button>
+                  </div>
+                  <p class="s-text">"{{ item.sentence1 }}"</p>
+                </div>
+
+                <!-- Sentence 2 -->
+                <div class="sentence-item s2">
+                  <div class="s-header">
+                    <span class="s-badge">2️⃣ ประโยคเนื้อหา (ประสบการณ์ ปวส.):</span>
+                    <button type="button" class="btn-copy-mini" (click)="copySentence(item.sentence2, 2)">📋</button>
+                  </div>
+                  <p class="s-text">"{{ item.sentence2 }}"</p>
+                </div>
+
+                <!-- Sentence 3 -->
+                <div class="sentence-item s3">
+                  <div class="s-header">
+                    <span class="s-badge">3️⃣ ประโยคปิด (ตอกย้ำความมุ่งมั่น):</span>
+                    <button type="button" class="btn-copy-mini" (click)="copySentence(item.sentence3, 3)">📋</button>
+                  </div>
+                  <p class="s-text">"{{ item.sentence3 }}"</p>
+                </div>
+              </div>
+
+              @if (item.quickTips) {
+                <div class="ai-card-tip">
+                  💡 <strong>ทริก:</strong> {{ item.quickTips }}
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ========================================== -->
+    <!-- TAB 3: OFFICIAL CHECKLIST (LINE & DOCS)    -->
+    <!-- ========================================== -->
+    @if (activeTab() === 'checklist') {
+      <div class="checklist-section">
+        <div class="check-banner">
+          <div>
+            <h3 class="section-title">เช็กลิสต์วันจริง (อ้างอิงประกาศ มทร.ธัญบุรี)</h3>
+            <p class="section-desc">เตรียมให้ครบก่อนเวลา 08.30 น. วันเสาร์ที่ 17 ต.ค. 2569</p>
+          </div>
+          <div class="check-progress-badge">
+            <span class="p-num">{{ completedChecklistCount() }}/{{ totalChecklistCount() }}</span>
+            <span class="p-text">พร้อมแล้ว</span>
+          </div>
+        </div>
+
+        <div class="checklist-list">
+          @for (item of officialChecklist; track item.id) {
+            <label class="check-row" [class.completed]="isChecklistCompleted(item.id)" [class.is-urgent]="item.urgent">
+              <input
+                type="checkbox"
+                class="check-checkbox"
+                [checked]="isChecklistCompleted(item.id)"
+                (change)="toggleChecklist(item.id)" />
+              <div class="check-info">
+                <div class="check-title-row">
+                  <span class="check-name">{{ item.title }}</span>
+                  @if (item.urgent) {
+                    <span class="badge badge-mandatory">ต้องทำทันที</span>
+                  }
+                </div>
+                <p class="check-sub">{{ item.description }}</p>
+              </div>
+            </label>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- ========================================== -->
+    <!-- TAB 3: MOCK SIMULATOR (45s QUICK PUNCH)    -->
+    <!-- ========================================== -->
+    @if (activeTab() === 'mock') {
+      <div class="mock-section">
+        <div class="mock-card">
+          <div class="mock-top-bar">
+            <div>
+              <span class="badge badge-brand">ซ้อมตอบปากเปล่า</span>
+              <span class="mock-num">ข้อที่ {{ mockQuestionIndex() + 1 }} / {{ questions().length }}</span>
+            </div>
+
+            <!-- Timer -->
+            <div class="quick-timer" [class.warning]="timerSeconds() <= 10 && timerSeconds() > 0" [class.ended]="timerSeconds() === 0">
+              <span class="timer-display">{{ formatTime(timerSeconds()) }}</span>
+              <button type="button" class="btn-timer-action" (click)="toggleTimer()">
+                {{ isTimerRunning() ? 'พัก' : 'เริ่มจับเวลา' }}
+              </button>
+              <button type="button" class="btn-timer-reset" (click)="resetTimer()">⟲</button>
+            </div>
+          </div>
+
+          <!-- Question Box -->
+          <div class="mock-q-body">
+            <h2 class="mock-q-text">{{ currentMockQuestion().question }}</h2>
+            <div class="mock-hook-pill">
+              🎯 สูตรจำ: <strong>{{ currentMockQuestion().keywordHook }}</strong>
+            </div>
+
+            <!-- Spoken Answer -->
+            <div class="mock-answer-preview">
+              <span class="mock-guide-label">🗣️ ซ้อมพูดประโยคนี้:</span>
+              <p class="mock-guide-speech">"{{ currentMockQuestion().punchline }}"</p>
+              <span class="mock-never">🚫 ระวัง: {{ currentMockQuestion().neverSay }}</span>
+            </div>
+          </div>
+
+          <!-- Navigation Controls -->
+          <div class="mock-nav-bar">
+            <button type="button" class="btn btn-secondary" (click)="prevMockQuestion()">← ข้อก่อนหน้า</button>
+            <button type="button" class="btn btn-accent" (click)="randomizeMockQuestion()">🎲 สุ่มข้อถัดไป</button>
+            <button type="button" class="btn btn-secondary" (click)="nextMockQuestion()">ข้อถัดไป →</button>
+          </div>
+
+          <!-- Webcam Optional Mirror -->
+          <div class="webcam-sub-box">
+            <button type="button" class="btn-webcam-mini" (click)="toggleWebcam()">
+              {{ webcamActive() ? '✕ ปิดกระจกส่องหน้า' : '📷 เปิดดูกล้องหน้าตัวเองขณะพูด' }}
+            </button>
+            @if (webcamActive()) {
+              <div class="mini-webcam-wrap">
+                <video #webcamVideo autoplay playsinline muted class="mini-webcam-video"></video>
+                <span class="eye-badge">👀 สบตารูกล้อง</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- ========================================== -->
+    <!-- TAB 4: OFFICIAL DOCUMENT INFO              -->
+    <!-- ========================================== -->
+    @if (activeTab() === 'official') {
+      <div class="official-section">
+        <div class="official-grid">
+          <!-- Left: Official Steps -->
+          <div class="official-card">
+            <h3 class="card-title">สรุปจากประกาศมหาวิทยาลัย (ล่าสุด)</h3>
+            <ul class="official-steps-list">
+              <li>
+                <strong>1. สัมภาษณ์ทางโทรศัพท์ และ/หรือ VDO Call ผ่าน LINE</strong>
+                <p>อาจารย์จะเป็นผู้ติดต่อไปยังผู้สมัครเอง ในวันเสาร์ที่ 17 ต.ค. 2569 ตั้งแต่เวลา 09.00 น. เป็นต้นไป</p>
+              </li>
+              <li>
+                <strong>2. กลุ่ม LINE: "04 สัมภาษณ์ โควตา 70"</strong>
+                <p>เมื่อเข้ากลุ่มแล้ว ให้พิมพ์แจ้ง <strong>"ชื่อ - นามสกุล"</strong> ของตนเองทันที</p>
+              </li>
+              <li>
+                <strong>3. เตรียมพร้อมล่วงหน้า 30 นาที</strong>
+                <p>สแตนด์บายรอสายตั้งแต่ 08.30 น. (ห้ามปิดเครื่อง ห้ามเปิดโหมดห้ามรบกวน)</p>
+              </li>
+              <li>
+                <strong>4. กฎ 13.00 น.</strong>
+                <p>หากถึงเวลา 13.00 น. ยังไม่ได้รับการติดต่อ ให้รีบโทรติดต่อกลับตามเบอร์อาจารย์ในกลุ่มไลน์</p>
+              </li>
+              <li>
+                <strong>5. การแต่งกาย</strong>
+                <p>ชุดนักเรียน/นักศึกษาเดิม หรือชุดสุภาพ (<strong>ห้ามใส่เสื้อยืด กางเกงยีนส์</strong>)</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right: Dates & Numbers -->
+          <div class="official-card">
+            <h3 class="card-title">ข้อมูลสถิติ & วันสำคัญ</h3>
+            <table class="simple-table">
+              <tbody>
+                <tr class="highlight-user-row">
+                  <th>ผู้สมัคร</th>
+                  <td><strong style="color: #3b82f6;">นายพุฒิพงศ์ ราชรักษ์ (รหัส 0312805627 • ลำดับที่ 28)</strong></td>
+                </tr>
+                <tr>
+                  <th>สถาบันเดิม</th>
+                  <td>วิทยาลัยเทคนิคนครศรีธรรมราช (ปวส. เทคโนโลยีสารสนเทศ)</td>
+                </tr>
+                <tr>
+                  <th>สาขา</th>
+                  <td>วิศวกรรมคอมพิวเตอร์ (เทียบโอน) ภาคปกติ (รหัส 19104000128)</td>
+                </tr>
+                <tr>
+                  <th>ผู้มีสิทธิ์</th>
+                  <td><strong>43 คน</strong> (ลำดับที่ 1 – 43 ในประกาศ)</td>
+                </tr>
+                <tr>
+                  <th>วันสัมภาษณ์</th>
+                  <td><strong>เสาร์ที่ 17 ตุลาคม 2569</strong> (09.00 น.)</td>
+                </tr>
+                <tr>
+                  <th>วันประกาศผล</th>
+                  <td><strong>พุธที่ 28 ตุลาคม 2569</strong></td>
+                </tr>
+                <tr>
+                  <th>ตรวจผลที่</th>
+                  <td><a href="https://oreg.rmutt.ac.th" target="_blank" rel="noopener">oreg.rmutt.ac.th</a></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="link-btn-wrap">
+              <a href="https://oreg.rmutt.ac.th" target="_blank" rel="noopener" class="btn btn-primary full-width">
+                ตรวจสอบประกาศที่ oreg.rmutt.ac.th ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="app-footer">
+    <div class="container footer-container">
+      <p><strong>พร้อมเสมอ</strong> • ปรับแต่งข้อความคำตอบเป็นของตัวเองได้ตลอดเวลา และเปิดฟังเสียงคำถามได้แบบ Real-time</p>
+      <button type="button" class="btn-clear" (click)="resetAllProgress()">รีเซ็ตความคืบหน้าการจำ</button>
+    </div>
+  </footer>
+</div>
