@@ -36,9 +36,9 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     importance: 'mandatory',
     importanceLabel: '🔥 เจอแน่นอน 100% (อันดับ 1)',
     keywordHook: 'เอฟ + เทคนิคคอน เกรด 3.61 + พัฒนา Web Application All Light 100%',
-    punchline: 'สวัสดีครับอาจารย์ ผมชื่อ นายพุฒิพงศ์ ราชรักษ์ (เอฟ) รหัสสอบ 0312805627 จบ ปวส. เทคโนโลยีสารสนเทศ เทคนิคคอน เกรด 3.61 ครับ ผมมีความชอบและชำนาญด้านการพัฒนาเว็บไซต์เป็นพิเศษ ผลงานเด่นคือพัฒนา Web Application ของระบบ All Light (allight-psi.vercel.app) เป็นเว็บ PWA ด้วย React และ Tailwind CSS ควบคุมระบบแบบ Real-time ครับ ตั้งใจมาต่อยอด วศ.บ.คอมฯ เทียบโอน ที่ มทร.ธัญบุรี ครับ',
+    punchline: 'สวัสดีครับอาจารย์ ผมชื่อ นายพุฒิพงศ์ ราชรักษ์ (เอฟ) รหัสสอบ 0312805627 จบ ปวส. เทคโนโลยีสารสนเทศ เทคนิคคอน เกรด 3.61 ครับ ผมมีความชอบและชำนาญด้านการพัฒนาเว็บไซต์เป็นพิเศษ ผลงานเด่นคือพัฒนา Web Application ของระบบ All Light (allight-psi.vercel.app) เป็นเว็บแอป PWA ด้วย Angular Framework และ TypeScript ควบคุมระบบแบบ Real-time ครับ ตั้งใจมาต่อยอด วศ.บ.คอมฯ เทียบโอน ที่ มทร.ธัญบุรี ครับ',
     neverSay: 'ห้ามเล่าประวัติครอบครัว หรือเรื่องที่ไม่เกี่ยวกับสายการเรียน',
-    tags: ['แนะนำตัว', 'พุฒิพงศ์', 'เอฟ', 'เกรด 3.61', 'เทคนิคคอน', 'ปวส.', 'เขียนเว็บ', 'Web Dev']
+    tags: ['แนะนำตัว', 'พุฒิพงศ์', 'เอฟ', 'เกรด 3.61', 'เทคนิคคอน', 'ปวส.', 'เขียนเว็บ', 'Angular', 'Web Dev']
   },
   {
     id: 2,
@@ -75,10 +75,10 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'โครงงาน / นวัตกรรมในพอร์ตทำอะไร ใช้อะไรทำ และมีประโยชน์อย่างไร?',
     importance: 'high',
     importanceLabel: 'สำคัญมาก',
-    keywordHook: 'All Light Web App + ควบคุม 3 โหมด (Manual/Timer/LDR) + React/Tailwind/PWA',
-    punchline: 'โครงงาน Smart Light IoT (All Light) ครับ โดยตัวผมรับผิดชอบพัฒนาส่วน Web Application ทั้งหมด เป็นเว็บแอป PWA ด้วย React, Vite และ Tailwind CSS มี 3 โหมดคือ สั่งเปิด-ปิดเอง (Manual), ตั้งเวลา (Timer), และเปิดไฟตามแสง (Auto LDR) แสดงสถานะ Real-time และสั่งการผ่าน REST API ครับ',
+    keywordHook: 'All Light Web App + ควบคุม 3 โหมด (Manual/Timer/LDR) + Angular/TS/PWA',
+    punchline: 'โครงงาน Smart Light IoT (All Light) ครับ โดยตัวผมรับผิดชอบพัฒนาส่วน Web Application ทั้งหมดคนเดียว 100% เป็นเว็บแอป PWA ด้วย Angular Framework และ TypeScript ครับ มี 3 โหมดคือ สั่งเปิด-ปิดเอง (Manual), ตั้งเวลา (Timer), และเปิดไฟตามแสง (Auto LDR) แสดงสถานะ Real-time และสั่งการผ่าน REST API ครับ',
     neverSay: 'ห้ามบอกว่าตัวเองทำฮาร์ดแวร์ถ้าไม่ได้ทำ ให้เน้นงานเว็บที่เราสร้างเอง 100%',
-    tags: ['Smart Light IoT', 'All Light', 'Web App', 'React', 'Tailwind', 'Vite', 'PWA']
+    tags: ['Smart Light IoT', 'All Light', 'Web App', 'Angular', 'TypeScript', 'RxJS', 'PWA']
   },
   {
     id: 5,
@@ -87,10 +87,10 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'ในกลุ่มโปรเจกต์มีกี่คน ตัวน้องทำหน้าที่อะไรในงานจริง?',
     importance: 'technical',
     importanceLabel: 'วัดกึ๋น (ห้ามโกหก)',
-    keywordHook: 'พัฒนา Web Application ทั้งหมด 100% (React + Tailwind + PWA + API)',
-    punchline: 'ในกลุ่มโปรเจกต์ ตัวผมรับผิดชอบพัฒนา Web Application ทั้งหมดคนเดียว 100% ครับ ตั้งแต่ออกแบบ UI/UX, เขียนโค้ดด้วย React และ Tailwind CSS, จัดการ State และคำสั่ง Real-time, ทำเป็น PWA ให้ติดตั้งลงมือถือได้, และเชื่อมต่อ API สื่อสารกับระบบครับ ส่วนฝั่งฮาร์ดแวร์เพื่อนในกลุ่มเป็นคนประกอบครับ',
+    keywordHook: 'พัฒนา Web Application ทั้งหมด 100% (Angular + TypeScript + PWA + API)',
+    punchline: 'ในกลุ่มโปรเจกต์ ตัวผมรับผิดชอบพัฒนา Web Application ทั้งหมดคนเดียว 100% ครับ ตั้งแต่ออกแบบ UI/UX, เขียนโค้ดด้วย Angular Framework และ TypeScript, จัดการ State และคำสั่ง Real-time ด้วย RxJS, ทำเป็น PWA ให้ติดตั้งลงมือถือได้, และเชื่อมต่อ REST API สื่อสารกับระบบครับ ส่วนฝั่งฮาร์ดแวร์เพื่อนในกลุ่มเป็นคนประกอบครับ',
     neverSay: 'ห้ามอ้างว่าทำฮาร์ดแวร์เองถ้าไม่ได้ทำ การบอกว่าเรารับผิดชอบฝั่ง Web 100% แสดงถึงความซื่อสัตย์และเชี่ยวชาญจริง',
-    tags: ['หน้าที่', 'พัฒนาเว็บทั้งหมด', 'Web Application', 'Frontend', 'React', 'UI/UX']
+    tags: ['หน้าที่', 'พัฒนาเว็บทั้งหมด', 'Web Application', 'Frontend', 'Angular', 'TypeScript', 'UI/UX']
   },
   {
     id: 6,
@@ -115,10 +115,10 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'ชำนาญภาษาเขียนเว็บไซต์และคอมพิวเตอร์อะไรบ้าง แต่ละภาษามีตัวอย่างผลงานอย่างไร?',
     importance: 'technical',
     importanceLabel: 'วัดกึ๋นทางเทคนิค',
-    keywordHook: 'JavaScript + TypeScript + HTML/CSS (React, Tailwind CSS, Vite, PWA, REST API)',
-    punchline: 'ชำนาญภาษา JavaScript และ TypeScript รวมถึง HTML5 และ CSS3 สำหรับพัฒนา Web Application ครับ ตัวอย่างจริงคือหน้าเว็บ All Light (allight-psi.vercel.app) ที่ผมพัฒนาด้วย React + Vite และ Tailwind CSS ทำเป็น PWA มีการใช้ Fetch API เชื่อมต่อรับ-ส่งสถานะแบบ Real-time ครับ และพร้อมมาต่อยอดเรียนรู้ภาษาอื่นๆ เพิ่มเติมที่ มทร.ธัญบุรี ครับ',
+    keywordHook: 'Angular Framework + TypeScript + JavaScript + HTML/CSS (RxJS, PWA, REST API)',
+    punchline: 'ชำนาญภาษา TypeScript และ JavaScript รวมถึง HTML5 และ CSS3 โดยใช้ Angular Framework ในการพัฒนา Web Application ครับ ตัวอย่างจริงคือหน้าเว็บ All Light (allight-psi.vercel.app) ที่ผมพัฒนาด้วย Angular + TypeScript ทำเป็น PWA รองรับการสั่งการและแสดงสถานะ Real-time ผ่าน REST API ครับ และพร้อมมาต่อยอดเรียนรู้ภาษา C/C++, Python และระบบสมองกลฝังตัวที่ มทร.ธัญบุรี ครับ',
     neverSay: 'อย่าร่ายชื่อภาษาเยอะเกินจริงถ้าไม่เคยเขียนจริง เน้นสิ่งที่ชำนาญและมีงานจริงโชว์',
-    tags: ['Coding', 'JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'Tailwind', 'Vite', 'PWA', 'REST API']
+    tags: ['Coding', 'Angular', 'TypeScript', 'JavaScript', 'HTML/CSS', 'RxJS', 'PWA', 'REST API']
   },
   {
     id: 8,
@@ -292,9 +292,9 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
     categoryLabel: '🤝 การแบ่งหน้าที่ในโปรเจกต์',
     keywords: ['แบ่งหน้าที่', 'หน้าที่', 'ทำอะไร', 'กี่คน', 'รับผิดชอบ', 'ทำคนเดียว', 'relay', 'วงจร'],
     sentence1: 'ในโปรเจกต์แบ่งหน้าที่ชัดเจนครับ ตัวผมรับผิดชอบพัฒนา Web Application ทั้งหมดคนเดียว 100% ครับ',
-    sentence2: 'ทั้งการออกแบบ UI/UX, เขียนโค้ด React, Tailwind CSS, และเชื่อมต่อ API สื่อสารกับระบบครับ',
+    sentence2: 'ทั้งการออกแบบ UI/UX, เขียนโค้ด Angular, TypeScript, จัดการ State ด้วย RxJS และเชื่อมต่อ REST API สื่อสารกับระบบครับ',
     sentence3: 'ส่วนเพื่อนในกลุ่มรับผิดชอบงานประกอบฮาร์ดแวร์และวงจรครับ',
-    quickTips: 'ตัวผมทำ Web Application ทั้งหมด 100% + เพื่อนทำฝั่งฮาร์ดแวร์'
+    quickTips: 'ตัวผมทำ Web Application ทั้งหมด 100% (Angular/TS) + เพื่อนทำฝั่งฮาร์ดแวร์'
   },
   {
     id: 'ai-ldr-sensor',
@@ -311,12 +311,12 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
     id: 'ai-allight-web',
     topic: 'สถาปัตยกรรม Web App All Light ออกแบบอย่างไร และใช้เทคโนโลยีอะไรบ้าง?',
     category: 'tech',
-    categoryLabel: '🌐 สถาปัตยกรรม Web App',
-    keywords: ['allight', 'web app', 'เว็บ', 'frontend', 'react', 'tailwind', 'vite', 'pwa', 'service worker', 'vercel'],
-    sentence1: 'พัฒนาด้วย React + Vite และจัดรูปแบบด้วย Tailwind CSS เพื่อความเร็วและ Responsive ครับ',
-    sentence2: 'ทำเป็น Progressive Web App (PWA) มี Manifest ให้ติดตั้งลงบนมือถือได้เหมือน Native App ครับ',
-    sentence3: 'Deploy บน Vercel และเชื่อมต่อ REST API ควบคุมอุปกรณ์แบบ Real-time ครับ',
-    quickTips: 'React + Vite + Tailwind CSS + PWA + Deploy บน Vercel'
+    categoryLabel: '🌐 สถาปัตยกรรม Web App (Angular)',
+    keywords: ['allight', 'web app', 'เว็บ', 'frontend', 'angular', 'typescript', 'rxjs', 'pwa', 'service worker', 'vercel'],
+    sentence1: 'พัฒนาด้วย Angular Framework และ TypeScript วางโครงสร้างแบบ Component และจัดการ Data Flow ด้วย RxJS ครับ',
+    sentence2: 'ทำเป็น Progressive Web App (PWA) มี Web App Manifest ให้ติดตั้งลงบนมือถือได้เหมือน Native App ครับ',
+    sentence3: 'Deploy บน Vercel และเชื่อมต่อ HTTP REST API ควบคุมอุปกรณ์และรับค่าสถานะแบบ Real-time ครับ',
+    quickTips: 'Angular + TypeScript + RxJS + PWA + Deploy บน Vercel'
   },
   {
     id: 'ai-internship-2places',
@@ -496,14 +496,14 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
   },
   {
     id: 'ai-programming-languages-detail',
-    topic: 'ชำนาญภาษาเขียนเว็บไซต์อะไรบ้าง และมีตัวอย่างการประยุกต์ใช้งานอย่างไร?',
+    topic: 'ชำนาญภาษาเขียนเว็บไซต์และคอมพิวเตอร์อะไรบ้าง และมีตัวอย่างการประยุกต์ใช้งานอย่างไร?',
     category: 'tech',
-    categoryLabel: '🌐 ภาษาเขียนเว็บ & ตัวอย่าง',
-    keywords: ['ชำนาญภาษา', 'ถนัดภาษา', 'ภาษาอะไรบ้าง', 'ตัวอย่างภาษา', 'เขียนภาษาอะไร', 'javascript', 'typescript', 'html', 'css', 'react', 'ภาษาเขียนเว็บ', 'ตัวอย่างโค้ด'],
-    sentence1: 'ชำนาญ JavaScript และ TypeScript ร่วมกับ HTML5 และ CSS3 เป็นหลักในการพัฒนา Web Application ครับ',
-    sentence2: 'ตัวอย่างจริงคือหน้าเว็บ All Light ที่ใช้ React + Vite และ Tailwind CSS จัดการ State ปุ่มกดและเชื่อมต่อ REST API แบบ Real-time ครับ',
-    sentence3: 'และทำโครงสร้าง PWA มี Manifest ให้ติดตั้งลงมือถือได้ พร้อมต่อยอดสู่ Full-stack และวิศวกรรมคอมพิวเตอร์ครับ',
-    quickTips: 'JavaScript + TypeScript + React + Tailwind CSS + PWA + REST API'
+    categoryLabel: '🌐 ภาษาเขียนเว็บ & ตัวอย่าง (Angular/TS)',
+    keywords: ['ชำนาญภาษา', 'ถนัดภาษา', 'ภาษาอะไรบ้าง', 'ตัวอย่างภาษา', 'เขียนภาษาอะไร', 'angular', 'typescript', 'javascript', 'html', 'css', 'rxjs', 'ภาษาเขียนเว็บ', 'ตัวอย่างโค้ด'],
+    sentence1: 'ชำนาญภาษา TypeScript และ JavaScript ร่วมกับ Angular Framework ในการพัฒนา Web Application ครับ',
+    sentence2: 'ตัวอย่างจริงคือเว็บ All Light ที่ใช้ Angular วางโครงสร้าง Component, จัดการคำสั่งและสถานะด้วย RxJS และ REST API ครับ',
+    sentence3: 'และทำเป็น PWA ติดตั้งลงมือถือได้ พร้อมนำพื้นฐานการเขียนโปรแกรมเชิงโครงสร้างนี้มาต่อยอดเรียนภาษา C/C++ และ Python ในหลักสูตร วศ.บ.คอมฯ ครับ',
+    quickTips: 'Angular Framework + TypeScript + RxJS + PWA + REST API'
   }
 ];
 
@@ -690,7 +690,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v10', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v11', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -1045,7 +1045,7 @@ export class App implements OnDestroy {
       matched = list.find(q => q.id === 5);
     } else if (lower.includes('ฝึกงาน') || lower.includes('บริษัท') || lower.includes('สถานประกอบการ') || lower.includes('ทำงาน') || lower.includes('โปรเกรส') || lower.includes('ศาล')) {
       matched = list.find(q => q.id === 6);
-    } else if (lower.includes('โค้ด') || lower.includes('ภาษา') || lower.includes('เขียนโปรแกรม') || lower.includes('python') || lower.includes('c++') || lower.includes('c') || lower.includes('embedded') || lower.includes('javascript') || lower.includes('ถนัด')) {
+    } else if (lower.includes('โค้ด') || lower.includes('ภาษา') || lower.includes('เขียนโปรแกรม') || lower.includes('angular') || lower.includes('แองกู') || lower.includes('typescript') || lower.includes('ไทป์สคริป') || lower.includes('rxjs') || lower.includes('python') || lower.includes('c++') || lower.includes('c') || lower.includes('embedded') || lower.includes('javascript') || lower.includes('ถนัด')) {
       matched = list.find(q => q.id === 7);
     } else if (lower.includes('คำนวณ') || lower.includes('คณิต') || lower.includes('แคล') || lower.includes('ฟิสิกส์') || lower.includes('เลข') || lower.includes('ไหวไหม')) {
       matched = list.find(q => q.id === 8);
@@ -1408,8 +1408,9 @@ export class App implements OnDestroy {
       localStorage.removeItem('prom_samur_custom_questions_v7');
       localStorage.removeItem('prom_samur_custom_questions_v8');
       localStorage.removeItem('prom_samur_custom_questions_v9');
+      localStorage.removeItem('prom_samur_custom_questions_v10');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v10');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v11');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
