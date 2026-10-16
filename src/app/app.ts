@@ -199,6 +199,30 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     punchline: 'ในพอร์ตมี 2 ส่วนครับ: ฝึกงาน 2 แห่ง (บ.โปรเกรส ด้านซอฟต์แวร์ และ ศาลจังหวัด ด้านระบบสารสนเทศ) และใบรับรองอบรมออนไลน์ 3 ใบ ด้าน Cybersecurity, ไอทีเพื่อชีวิต และการเข้ารหัสประยุกต์ ม.เกษตรฯ ซึ่งช่วยให้ผมคำนึงถึงความปลอดภัยของข้อมูลในระบบ IoT ครับ',
     neverSay: 'ห้ามจำไม่ได้ว่าตัวเองใส่เกียรติบัตรอะไรไปในพอร์ต',
     tags: ['เกียรติบัตร', 'ใบรับรอง', 'certificate', 'Cybersecurity', 'Cryptography', 'ฝึกงาน', 'KU MOOC']
+  },
+  {
+    id: 14,
+    category: 'extra',
+    categoryLabel: 'รู้จักตัวเอง',
+    question: 'บอกข้อดี - ข้อเสีย ของตัวเองให้ฟังหน่อย (จุดเด่น และจุดที่ต้องปรับปรุง)?',
+    importance: 'high',
+    importanceLabel: 'วัดความจริงใจ',
+    keywordHook: 'ข้อดี: ชอบลงมือทำจริง + กัดไม่ปล่อย | ข้อเสีย: โฟกัสแก้โค้ดคนเดียวนานไป แก้โดยหัดปรึกษาให้เร็วขึ้น',
+    punchline: 'ข้อดีคือ เป็นคนชอบลงมือทำจริง กัดไม่ปล่อยและอดทนกับการ Debug ปัญหาจนสำเร็จครับ ส่วนข้อเสียคือ เวลาแก้ปัญหาจะจดจ่ออยู่คนเดียวนานเกินไป ตอนนี้ปรับโดยตั้งเวลาและรีบสื่อสารปรึกษาเพื่อนหรืออาจารย์ให้เร็วขึ้นครับ',
+    neverSay: 'ห้ามตอบว่า "ไม่มีข้อเสียเลย" หรือตอบข้อเสียร้ายแรงที่แก้ไม่ได้',
+    tags: ['ข้อดีข้อเสีย', 'จุดเด่น', 'จุดด้อย', 'รู้จักตัวเอง', 'ทัศนคติ']
+  },
+  {
+    id: 15,
+    category: 'skills',
+    categoryLabel: 'หลักสูตร วศ.บ.',
+    question: 'รู้ไหมว่าสาขาวิศวกรรมคอมพิวเตอร์ (วศ.บ. เทียบโอน) เรียนอะไรบ้าง?',
+    importance: 'high',
+    importanceLabel: 'วัดความรู้จริง',
+    keywordHook: 'Hardware (สมองกลฝังตัว/วงจร) + Software (โครงสร้างข้อมูล/ระบบ) + Network/Security',
+    punchline: 'ทราบครับ เรียนครอบคลุม 3 ด้าน: ฮาร์ดแวร์ (Microcontroller, Embedded Systems), ซอฟต์แวร์ (Data Structures, OS, การเขียนโปรแกรม), และเน็ตเวิร์ก/ความปลอดภัย ผสานกับการคำนวณทางวิศวกรรมเพื่อออกแบบระบบที่สมบูรณ์ครับ',
+    neverSay: 'ห้ามตอบว่า "คิดว่าเหมือนวิทยาการคอมฯ ทั่วไป"',
+    tags: ['วิศวะคอมฯ เรียนอะไร', 'หลักสูตร', 'Hardware', 'Software', 'Embedded']
   }
 ];
 
@@ -423,6 +447,28 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
     sentence2: 'นำความรู้ฮาร์ดแวร์และซอฟต์แวร์ไปพัฒนาระบบ Smart Home และ Smart Factory ครับ',
     sentence3: 'เป็นสายงานที่กำลังเติบโตสูง และสามารถนำความรู้มาสร้างคุณค่าได้จริงครับ',
     quickTips: 'ตำแหน่ง: IoT Engineer / Embedded Systems Developer'
+  },
+  {
+    id: 'ai-strengths-weaknesses',
+    topic: 'ข้อดีและข้อเสีย (จุดเด่นและจุดที่ต้องปรับปรุง) ของตัวเองคืออะไร?',
+    category: 'attitude',
+    categoryLabel: '🧠 รู้จักตัวเอง',
+    keywords: ['ข้อดี', 'ข้อเสีย', 'จุดเด่น', 'จุดด้อย', 'จุดแข็ง', 'จุดอ่อน', 'นิสัย', 'บุคลิก'],
+    sentence1: 'ข้อดีคือ มีความอดทนสูง ชอบลงมือปฏิบัติจริง และกัดไม่ปล่อยในการ Debug ปัญหาครับ',
+    sentence2: 'ข้อเสียคือ เมื่อก่อนเวลาเจอบั๊กจะจดจ่อแก้คนเดียวนานเกินไปครับ',
+    sentence3: 'ปัจจุบันแก้ไขโดยตั้งเวลาจำกัด และรีบสื่อสารขอคำแนะนำจากอาจารย์หรือเพื่อนร่วมทีมครับ',
+    quickTips: 'ข้อดี = อดทน Debug ไม่ยอมแพ้ | ข้อเสีย = แก้คนเดียวนานไป ปรับโดยรีบปรึกษา'
+  },
+  {
+    id: 'ai-curriculum-ce',
+    topic: 'รู้ไหมว่าหลักสูตรวิศวกรรมคอมพิวเตอร์ที่ มทร.ธัญบุรี เรียนอะไรบ้าง?',
+    category: 'tech',
+    categoryLabel: '📚 หลักสูตร วศ.บ.',
+    keywords: ['เรียนอะไรบ้าง', 'สาขานี้เรียนอะไร', 'หลักสูตร', 'วิชาที่เรียน', 'วศ.บ.', 'วิศวะคอม', 'เนื้อหา'],
+    sentence1: 'ทราบครับ เรียนทั้ง Hardware, Software, และระบบ Network & Security ครับ',
+    sentence2: 'โดยลงลึกเรื่อง Embedded Systems, สถาปัตยกรรมคอมพิวเตอร์ และการคำนวณวิศวกรรมครับ',
+    sentence3: 'ผมต้องการนำทักษะเหล่านี้มาต่อยอดจากโปรเจกต์ Smart Light ให้เป็นวิศวกรเต็มตัวครับ',
+    quickTips: '3 ด้าน: ฮาร์ดแวร์ (Embedded) + ซอฟต์แวร์ + เน็ตเวิร์ก/ไซเบอร์'
   }
 ];
 
@@ -609,7 +655,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v6', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v7', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -978,6 +1024,10 @@ export class App implements OnDestroy {
       matched = list.find(q => q.id === 12);
     } else if (lower.includes('เกียรติบัตร') || lower.includes('ใบประกาศ') || lower.includes('ใบรับรอง') || lower.includes('certificate') || lower.includes('ใบเซอร์') || lower.includes('ไซเบอร์') || lower.includes('cryptography') || lower.includes('เข้ารหัส') || lower.includes('mooc')) {
       matched = list.find(q => q.id === 13);
+    } else if (lower.includes('ข้อดี') || lower.includes('ข้อเสีย') || lower.includes('จุดเด่น') || lower.includes('จุดด้อย') || lower.includes('จุดแข็ง') || lower.includes('จุดอ่อน')) {
+      matched = list.find(q => q.id === 14);
+    } else if (lower.includes('เรียนอะไร') || lower.includes('สาขานี้') || lower.includes('หลักสูตร') || lower.includes('วิชาที่เรียน')) {
+      matched = list.find(q => q.id === 15);
     } else {
       matched = list.find(q =>
         lower.split(' ').some(w => w.length > 2 && (q.question.toLowerCase().includes(w) || q.keywordHook.toLowerCase().includes(w)))
@@ -1309,14 +1359,15 @@ export class App implements OnDestroy {
 
   private loadQuestions() {
     try {
-      // Clear legacy storage v1, v2, v3, v4, v5 so concise portfolio questions take precedence
+      // Clear legacy storage v1, v2, v3, v4, v5, v6 so concise portfolio questions take precedence
       localStorage.removeItem('prom_samur_custom_questions');
       localStorage.removeItem('prom_samur_custom_questions_v2');
       localStorage.removeItem('prom_samur_custom_questions_v3');
       localStorage.removeItem('prom_samur_custom_questions_v4');
       localStorage.removeItem('prom_samur_custom_questions_v5');
+      localStorage.removeItem('prom_samur_custom_questions_v6');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v6');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v7');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
