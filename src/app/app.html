@@ -82,6 +82,8 @@
             <span>🏛️ เป้าหมาย: <strong>{{ candidateProfile.majorName }}</strong></span>
             <span class="divider">•</span>
             <span>🏢 ฝึกงาน: <strong>{{ candidateProfile.internship }}</strong></span>
+            <span class="divider">•</span>
+            <span>💡 โครงงาน: <strong>{{ candidateProfile.featuredProjects }}</strong></span>
           </div>
         </div>
         <div class="candidate-callout">
@@ -172,12 +174,12 @@
                 <div class="how-card">
                   <div class="how-num">3</div>
                   <h5>ถ้าใส่หูฟังใน Zoom ให้ "ทวนคำถามอาจารย์สั้นๆ"</h5>
-                  <p>หากจำเป็นต้องเสียบหูฟัง ไมค์คอมจะไม่ได้ยินเสียงในหู ให้ใช้วิธี <strong>"พูดทวนคำถาม"</strong> เช่น <em>"อาจารย์ถามเรื่องโปรเจกต์ Todaprime ใช่ไหมครับ..."</em> หรือ <em>"เรื่อง OOP ใช่ไหมครับ..."</em> ไมค์จะจับเสียงปากเราแล้วเด้งคำตอบขึ้นมาทันที!</p>
+                  <p>หากจำเป็นต้องเสียบหูฟัง ไมค์คอมจะไม่ได้ยินเสียงในหู ให้ใช้วิธี <strong>"พูดทวนคำถาม"</strong> เช่น <em>"อาจารย์ถามเรื่องโปรเจกต์ Smart Light ใช่ไหมครับ..."</em> หรือ <em>"เรื่อง Relay 220V ใช่ไหมครับ..."</em> ไมค์จะจับเสียงปากเราแล้วเด้งคำตอบขึ้นมาทันที!</p>
                 </div>
                 <div class="how-card">
                   <div class="how-num">4</div>
                   <h5>ปุ่มลัดคลิกเดียว (เร็วที่สุด 0.1 วินาที ชัวร์ 100%)</h5>
-                  <p>กดปุ่มคีย์เวิร์ดด้านล่าง เช่น <strong>[แนะนำตัว] [ทำไมเลือก มทร.] [Todaprime] [ฝึกงาน] [OOP]</strong> คำตอบจะเด้งขึ้นมาใน 0.1 วินาที ไม่ต้องลุ้นเสียงสะท้อน</p>
+                  <p>กดปุ่มคีย์เวิร์ดด้านล่าง เช่น <strong>[แนะนำตัว] [ทำไมเลือก มทร.] [Smart Light] [ฝึกงาน 2 แห่ง] [เกรด 3.61]</strong> คำตอบจะเด้งขึ้นมาใน 0.1 วินาที ไม่ต้องลุ้นเสียงสะท้อน</p>
                 </div>
               </div>
             </div>
@@ -209,18 +211,18 @@
               <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(1)">👤 1. แนะนำตัว (100%)</button>
               <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(2)">🏫 2. ทำไมเลือก มทร. (100%)</button>
               <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(3)">✅ 3. ถ้าติดเอาไหม (100%)</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(4)">💻 4. โปรเจกต์ ปวส.</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(5)">👥 5. ในกลุ่มกี่คน</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(7)">⌨️ 7. ภาษาโค้ด</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(8)">📐 8. คำนวณ/เลข</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(4)">💡 4. Smart Light IoT</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(5)">🛠️ 5. หน้าที่ทำคนเดียว</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน 2 แห่ง</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(7)">⌨️ 7. Embedded C/C++</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(8)">📐 8. เกรด 3.61/เลข</button>
               <button type="button" class="chip-action" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(10)">🎯 10. อาชีพเป้าหมาย</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('OOP')">🤖 OOP 4 เสาหลัก</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Database SQL vs NoSQL')">🤖 Database SQL</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Network TCP vs UDP')">🤖 Network TCP</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ทำไมเกรดน้อย')">🤖 ทำไมเกรดน้อย</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ทะเลาะกับเพื่อนในกลุ่ม')">🤖 ทะเลาะกับเพื่อน</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(10)">🎯 10. IoT Engineer</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Smart Light')">💡 All Light 3 โหมด</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ESP32')">⚡ ESP32 & Relay 220V</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('LDR')">☀️ เซนเซอร์ LDR (ADC)</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Cybersecurity')">📜 อบรม Cyber & Crypto</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('จิตอาสา')">🤝 จิตอาสา & eSports</button>
             </div>
           </div>
         </div>
@@ -624,10 +626,10 @@
         <!-- AI Hero Header -->
         <div class="ai-hero-card">
           <div class="ai-hero-content">
-            <div class="ai-hero-badge">🤖 AI ตอบคำถามนอกเหนือทีละประโยค</div>
-            <h2 class="ai-hero-title">เตรียมพร้อมรับมือทุกคำถามที่อาจารย์อาจจะถาม</h2>
+            <div class="ai-hero-badge">🤖 AI ตอบคำถามนอกเหนือทีละประโยค (อิงพอร์ต 100%)</div>
+            <h2 class="ai-hero-title">เตรียมพร้อมรับมือทุกคำถามที่อาจารย์อาจจะถามเจาะลึก</h2>
             <p class="ai-hero-desc">
-              ไม่ว่าจะเป็นเรื่องเทคนิคคอมฯ (OOP, Database, Network, Git, Docker), เรื่องทัศนคติ (เกรดน้อย, ทะเลาะกับเพื่อน), หรือเรื่องความพร้อม (ค่าเทอม, ทำงานไปด้วย) 
+              ครอบคลุมทุกจุดในแฟ้มสะสมผลงาน 8 หน้า: โครงงาน Smart Light IoT (ESP32, Relay 220V, LDR Sensor, PWA Web App), การฝึกงาน 2 แห่ง, ใบรับรอง Cyber & Cryptography, วินัยเกรด 3.61, กิจกรรมจิตอาสาและ eSports 
               ระบบได้เตรียม <strong>"โครงสร้าง 3 ประโยคทอง"</strong> ให้คุณพูดตอบได้อย่างมั่นใจและตรงใจคณะกรรมการ
             </p>
           </div>
@@ -639,7 +641,7 @@
               <input
                 type="text"
                 class="ai-search-input"
-                placeholder="พิมพ์หัวข้อหรือคำถามที่ต้องการค้นหา (เช่น OOP, Git, เกรดน้อย, ค่าเทอม, ทำงานไปด้วย, หรือคำถามใดๆ)..."
+                placeholder="พิมพ์หัวข้อหรือคำถามที่ต้องการค้นหา (เช่น Smart Light, ESP32, Relay 220V, ฝึกงาน 2 แห่ง, เกรด 3.61, หรือคำถามใดๆ)..."
                 [ngModel]="aiSearchQuery()"
                 (ngModelChange)="aiSearchQuery.set($event)"
                 (keyup.enter)="askAiAssistant()" />
@@ -654,23 +656,23 @@
 
           <!-- Fast Preset Prompt Pills -->
           <div class="ai-pills-row">
-            <span class="pills-title">💡 หัวข้อยอดฮิตที่อาจารย์มักถาม:</span>
+            <span class="pills-title">💡 หัวข้อยอดฮิตจากแฟ้มสะสมผลงาน & คำถามวิศวะ:</span>
             <div class="pills-flex">
-              <button type="button" class="ai-pill" (click)="askAiAssistant('OOP 4 เสาหลัก')">OOP 4 เสาหลัก</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('Database SQL vs NoSQL')">SQL vs NoSQL</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('Network TCP vs UDP')">Network TCP/UDP</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('Git & GitHub')">Git & GitHub</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('Docker & Container')">Docker</button>
-              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('ทำไมเกรดเฉลี่ย ปวส. น้อย')">ทำไมเกรดน้อย?</button>
-              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('เคยทะเลาะกับเพื่อนในกลุ่มโปรเจกต์ไหม')">ทะเลาะกับเพื่อน?</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('ทำงานไปด้วยเรียนไปด้วยได้ไหม')">ทำงานไปด้วยได้ไหม?</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('ถ้าวิชาคำนวณยากจะเรียนไหวไหม')">คำนวณไม่เก่ง?</button>
-              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('ถ้าไม่ผ่านรอบโควตานี้จะทำอย่างไร')">ถ้าไม่ติดรอบนี้?</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('เรื่องค่าเทอมและค่าใช้จ่าย')">ค่าเทอม/กยศ.</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('ทำไมเลือก มทร.ธัญบุรี ไม่เลือกพระจอม')">ทำไมเลือก มทร.ธัญบุรี?</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('วิศวะคอมพิวเตอร์ต่างกับวิทยาการคอมอย่างไร')">CE ต่างจาก CS ยังไง?</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('Linux และ Command Line')">Linux / Command Line</button>
-              <button type="button" class="ai-pill" (click)="askAiAssistant('API และ RESTful API')">RESTful API</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Smart Light')">💡 Smart Light 3 โหมด</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ESP32')">⚡ ESP32 & ฮาร์ดแวร์</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Relay 220V')">🛡️ Relay Safety 220V</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('LDR')">☀️ เซนเซอร์ LDR (ADC)</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('All Light Web App')">🌐 All Light PWA & Go</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ฝึกงาน 2 แห่ง')">🏢 ฝึกงาน 2 แห่ง</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('Cybersecurity')">📜 ใบรับรอง Cyber & Crypto</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('เกรด 3.61')">📐 เกรด 3.61 & วินัย</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('จิตอาสาน้ำท่วม')">🤝 น้ำท่วมหาดใหญ่ & ROV</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ทำไมเลือก มทร.ธัญบุรี')">🏫 ทำไมเลือก มทร.ธัญบุรี?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('CE ต่างจาก CS')">💻 CE ต่างจาก CS ยังไง?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('คำนวณยาก')">📐 ฟิสิกส์/แคลคูลัส ไหวไหม?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('ทำงานไปด้วยเรียนไปด้วย')">💼 เรียน 3 ปีไม่มีงานประจำ</button>
+              <button type="button" class="ai-pill ai-pill-warn" (click)="askAiAssistant('ถ้าไม่ผ่านรอบโควตานี้')">ถ้าไม่ติดรอบนี้?</button>
+              <button type="button" class="ai-pill" (click)="askAiAssistant('คำถามปิดท้าย')">🎯 คำถามปิดท้ายอาจารย์</button>
             </div>
           </div>
         </div>
