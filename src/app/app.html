@@ -196,11 +196,15 @@
           @if (speechTranscript()) {
             <div class="transcript-box animate-fade-in" [class.has-sound]="isSoundDetected()">
               <div class="transcript-header-row">
-                <span class="transcript-tag">🗣️ ข้อความที่ไมค์ได้ยินสด:</span>
-                <span class="transcript-confirmed">🟢 อัดเสียงติดแล้ว (กำลังจับคำตอบ)</span>
+                <div class="transcript-header-left">
+                  <span class="transcript-tag">🗣️ ข้อความที่ไมค์ได้ยินสด:</span>
+                  <span class="transcript-confirmed">🟢 อัดเสียงติดแล้ว (กำลังจับคำตอบ)</span>
+                </div>
+                <button type="button" class="btn-clear-transcript" (click)="clearSpeechData()">✕ ล้าง</button>
               </div>
-              <p class="transcript-content">"{{ speechTranscript() }}"</p>
-              <button type="button" class="btn-clear-transcript" (click)="clearSpeechData()">✕ ล้าง</button>
+              <div class="transcript-body-row">
+                <p class="transcript-content">"{{ speechTranscript() }}"</p>
+              </div>
             </div>
           }
 
