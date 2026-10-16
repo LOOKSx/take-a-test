@@ -1,15 +1,20 @@
 <div class="app-layout" [class.dark-theme]="isDarkMode()">
   <!-- TOP URGENT ZOOM INTERVIEW BANNER -->
-  <aside class="urgent-banner">
-    <div class="container urgent-container">
-      <div class="urgent-badge" style="background: #2563eb; color: #fff;">📹 สัมภาษณ์ผ่าน Zoom</div>
-      <div class="urgent-text">
-        <strong>รูปแบบการสอบ: สัมภาษณ์ผ่าน Zoom Meeting (ลิงก์/Meeting ID ส่งในกลุ่ม LINE "04 สัมภาษณ์ โควตา 70")</strong>
-        <span>• ตั้งชื่อใน Zoom: <strong>28_0312805627_นายพุฒิพงศ์ ราชรักษ์</strong> • เข้า Waiting Room สแตนด์บายก่อน 08.45 น.</span>
+  @if (showUrgentBanner()) {
+    <aside class="urgent-banner">
+      <div class="container urgent-container">
+        <div class="urgent-badge" style="background: #2563eb; color: #fff;">📹 สัมภาษณ์ผ่าน Zoom</div>
+        <div class="urgent-text">
+          <strong>รูปแบบการสอบ: สัมภาษณ์ผ่าน Zoom Meeting (ลิงก์/Meeting ID ส่งในกลุ่ม LINE "04 สัมภาษณ์ โควตา 70")</strong>
+          <span>• ตั้งชื่อใน Zoom: <strong>28_0312805627_นายพุฒิพงศ์ ราชรักษ์</strong> • เข้า Waiting Room สแตนด์บายก่อน 08.45 น.</span>
+        </div>
+        <div class="urgent-right-group">
+          <span class="urgent-time">เริ่มสัมภาษณ์ 09.00 น. (17 ต.ค.)</span>
+          <button type="button" class="btn-dismiss-banner" (click)="showUrgentBanner.set(false)" title="ซ่อนแถบนี้เพื่อเพิ่มพื้นที่หน้าจอ">✕ ซ่อน</button>
+        </div>
       </div>
-      <span class="urgent-time">เริ่มสัมภาษณ์ 09.00 น. (17 ต.ค.)</span>
-    </div>
-  </aside>
+    </aside>
+  }
 
   <!-- APP HEADER -->
   <header class="app-header">
@@ -323,8 +328,8 @@
       </div>
       <div class="strip-item">
         <span class="strip-label">รูปแบบการสอบ</span>
-        <strong class="strip-val text-accent">โทรศัพท์ / LINE VDO Call</strong>
-        <span class="strip-sub">อาจารย์เป็นฝ่ายติดต่อมาเอง</span>
+        <strong class="strip-val text-accent">Zoom Meeting</strong>
+        <span class="strip-sub">เข้าห้องก่อน 08.45 น.</span>
       </div>
       <div class="strip-item">
         <span class="strip-label">ผู้มีสิทธิ์ในสาขา</span>

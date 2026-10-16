@@ -415,6 +415,7 @@ export class App implements OnDestroy {
 
   // Theme Mode (Dark Theme as primary request)
   isDarkMode = signal<boolean>(true);
+  showUrgentBanner = signal<boolean>(true);
 
   // Navigation & View Mode
   activeTab = signal<'cheat' | 'ai-assistant' | 'checklist' | 'mock' | 'official'>('cheat');

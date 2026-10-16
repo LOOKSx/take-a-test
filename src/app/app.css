@@ -177,11 +177,33 @@
   flex: 1;
 }
 
+.urgent-right-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .urgent-time {
   font-size: 0.8rem;
   background: rgba(0, 0, 0, 0.2);
   padding: 0.2rem 0.6rem;
   border-radius: var(--radius-full);
+}
+
+.btn-dismiss-banner {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-dismiss-banner:hover {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 /* 2. APP HEADER */
