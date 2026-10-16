@@ -183,9 +183,9 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'มีคำถามอะไรอยากถามอาจารย์ หรือคณะกรรมการเพิ่มเติมไหม? (คำถามปิดท้าย)',
     importance: 'high',
     importanceLabel: 'โอกาสโชว์ของ',
-    keywordHook: 'ถามเรื่องแล็บวิจัย Embedded & IoT ของภาควิชา',
-    punchline: 'อยากสอบถามอาจารย์ครับว่า สำหรับเด็กเทียบโอนที่สนใจด้าน Embedded Systems และ IoT ทางภาควิชามีแล็บวิจัยหรือกลุ่มโปรเจกต์ตัวไหนที่สามารถเข้าไปช่วยงานได้ตั้งแต่ปีแรกบ้างครับ',
-    neverSay: 'ห้ามตอบว่า "ไม่มีครับ" (การถามคำถามแสดงถึงความสนใจจริง)',
+    keywordHook: 'ถามเรื่องแล็บวิจัย Embedded & IoT หรือการเตรียมตัววิชาคำนวณ',
+    punchline: 'เลือกถาม 1 ข้อครับ: (1) สายแล็บ: "สำหรับเด็กเทียบโอนที่สนใจด้าน Embedded Systems & IoT ทางภาควิชามีแล็บวิจัยที่เปิดรับเข้าไปช่วยงานตั้งแต่ปีแรกไหมครับ?" หรือ (2) สายวิชาการ: "มีวิชาคำนวณหรือวิศวกรรมตัวไหนที่อาจารย์แนะนำให้ทบทวนเตรียมตัวล่วงหน้าก่อนเปิดเทอมไหมครับ?"',
+    neverSay: 'ห้ามตอบว่า "ไม่มีครับ" (การถามคำถามแสดงถึงความมุ่งมั่นจริง)',
     tags: ['คำถามปิดท้าย', 'การเตรียมตัว', 'แล็บวิจัย', 'IoT']
   },
   {
@@ -609,7 +609,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v5', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v6', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -1309,13 +1309,14 @@ export class App implements OnDestroy {
 
   private loadQuestions() {
     try {
-      // Clear legacy storage v1, v2, v3, v4 so concise portfolio questions take precedence
+      // Clear legacy storage v1, v2, v3, v4, v5 so concise portfolio questions take precedence
       localStorage.removeItem('prom_samur_custom_questions');
       localStorage.removeItem('prom_samur_custom_questions_v2');
       localStorage.removeItem('prom_samur_custom_questions_v3');
       localStorage.removeItem('prom_samur_custom_questions_v4');
+      localStorage.removeItem('prom_samur_custom_questions_v5');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v5');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v6');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
