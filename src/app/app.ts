@@ -35,10 +35,10 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'แนะนำตัวสั้น ๆ จบ ปวส. จากไหน สาขาอะไร เกรดเท่าไหร่?',
     importance: 'mandatory',
     importanceLabel: '🔥 เจอแน่นอน 100% (อันดับ 1)',
-    keywordHook: 'เอฟ + เทคนิคคอน เกรด 3.61 + Smart Light IoT + ฝึกงาน 2 แห่ง',
-    punchline: 'สวัสดีครับอาจารย์ ผมชื่อ นายพุฒิพงศ์ ราชรักษ์ (เอฟ) รหัสสอบ 0312805627 จบ ปวส. เทคโนโลยีสารสนเทศ เทคนิคคอน เกรด 3.61 ครับ ผลงานเด่นคือ Smart Light IoT ควบคุมไฟผ่านเว็บ และฝึกงานด้านไอที 2 แห่ง ตั้งใจมาต่อยอด วศ.บ.คอมฯ เทียบโอน ที่ มทร.ธัญบุรี ครับ',
+    keywordHook: 'เอฟ + เทคนิคคอน เกรด 3.61 + ชอบเขียนเว็บประยุกต์ IoT + Smart Light',
+    punchline: 'สวัสดีครับอาจารย์ ผมชื่อ นายพุฒิพงศ์ ราชรักษ์ (เอฟ) รหัสสอบ 0312805627 จบ ปวส. เทคโนโลยีสารสนเทศ เทคนิคคอน เกรด 3.61 ครับ ผมชอบและชำนาญการเขียนเว็บไซต์ และชอบนำเว็บมาอะแดปเชื่อมต่อกับฮาร์ดแวร์ IoT เหมือนในโปรเจกต์ Smart Light ควบคุมไฟ 220V ครับ ตั้งใจมาต่อยอด วศ.บ.คอมฯ เทียบโอน ที่ มทร.ธัญบุรี ครับ',
     neverSay: 'ห้ามเล่าประวัติครอบครัว หรือเรื่องที่ไม่เกี่ยวกับสายการเรียน',
-    tags: ['แนะนำตัว', 'พุฒิพงศ์', 'เอฟ', 'เกรด 3.61', 'เทคนิคคอน', 'ปวส.']
+    tags: ['แนะนำตัว', 'พุฒิพงศ์', 'เอฟ', 'เกรด 3.61', 'เทคนิคคอน', 'ปวส.', 'เขียนเว็บ', 'Web Dev']
   },
   {
     id: 2,
@@ -112,13 +112,13 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     id: 7,
     category: 'skills',
     categoryLabel: 'ทักษะคอมฯ',
-    question: 'เขียนโค้ดภาษาอะไรเป็นบ้าง ถนัดภาษาไหนที่สุด?',
+    question: 'ชำนาญภาษาคอมพิวเตอร์อะไรบ้าง แต่ละภาษามีตัวอย่างผลงานอย่างไร?',
     importance: 'technical',
     importanceLabel: 'วัดกึ๋นทางเทคนิค',
-    keywordHook: 'Embedded C/C++ (ESP32) + JavaScript (Web App) + อบรมไซเบอร์',
-    punchline: 'ถนัด Embedded C/C++ สำหรับเขียนบอร์ด ESP32 และ JavaScript/HTML/CSS สำหรับทำเว็บแอปครับ นอกจากนี้ผ่านการอบรม Cybersecurity และ Cryptography มาด้วยครับ',
+    keywordHook: 'ชำนาญ JavaScript (Web PWA/API) + C/C++ (ESP32/Relay 220V/LDR)',
+    punchline: 'ชำนาญ 2 ภาษาหลักครับ: (1) JavaScript/HTML/CSS ด้าน Web เช่น ทำหน้าเว็บ PWA ระบบ All Light ควบคุมสถานะ Real-time ผ่าน REST API และ (2) Embedded C/C++ ด้านฮาร์ดแวร์ เขียนบอร์ด ESP32 อ่านค่าเซนเซอร์ LDR (ADC) และสั่ง Relay 5V ตัดต่อไฟ 220V ครับ ทำให้ผมเชื่อมต่อทั้ง Web และ Hardware ได้ครบวงจรครับ',
     neverSay: 'อย่าร่ายชื่อภาษาเยอะเกินจริงถ้าไม่เคยเขียนจริง',
-    tags: ['Coding', 'Embedded C/C++', 'JavaScript', 'Web App', 'IoT']
+    tags: ['Coding', 'Embedded C/C++', 'JavaScript', 'Web App', 'IoT', 'ชำนาญภาษาอะไร', 'ตัวอย่างภาษา']
   },
   {
     id: 8,
@@ -493,6 +493,17 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
     sentence2: 'โดยลงลึกเรื่อง Embedded Systems, สถาปัตยกรรมคอมพิวเตอร์ และการคำนวณวิศวกรรมครับ',
     sentence3: 'ผมต้องการนำทักษะเหล่านี้มาต่อยอดจากโปรเจกต์ Smart Light ให้เป็นวิศวกรเต็มตัวครับ',
     quickTips: '3 ด้าน: ฮาร์ดแวร์ (Embedded) + ซอฟต์แวร์ + เน็ตเวิร์ก/ไซเบอร์'
+  },
+  {
+    id: 'ai-programming-languages-detail',
+    topic: 'ชำนาญภาษาคอมพิวเตอร์อะไรบ้าง และมีตัวอย่างการประยุกต์ใช้งานอย่างไร?',
+    category: 'tech',
+    categoryLabel: '💻 ภาษาที่ชำนาญ & ตัวอย่าง',
+    keywords: ['ชำนาญภาษา', 'ถนัดภาษา', 'ภาษาอะไรบ้าง', 'ตัวอย่างภาษา', 'เขียนภาษาอะไร', 'javascript', 'c++', 'c language', 'ภาษาคอม', 'ตัวอย่างโค้ด'],
+    sentence1: 'ภาษาแรกคือ JavaScript/HTML/CSS ครับ ชำนาญการสร้าง Web App และ PWA ตัวอย่างคือหน้าเว็บ All Light ที่เชื่อมต่อ API ควบคุมแบบ Real-time ครับ',
+    sentence2: 'ภาษาที่สองคือ C/C++ ครับ ชำนาญการเขียนบอร์ด ESP32 ตัวอย่างคือโค้ดอ่านค่าแสง LDR แปลงผ่าน ADC และสั่งตัดต่อ Relay คุมไฟบ้าน 220V ครับ',
+    sentence3: 'จุดเด่นของผมคือการนำ Web มาอะแดปเชื่อมต่อกับ Hardware ได้จริง และพร้อมต่อยอดภาษาเชิงลึกอย่าง Python และ C++ ที่ มทร.ธัญบุรี ครับ',
+    quickTips: 'JS (Web App/API Real-time) + C/C++ (ESP32/LDR ADC/Relay 220V)'
   }
 ];
 
@@ -679,7 +690,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v8', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v9', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -1387,7 +1398,7 @@ export class App implements OnDestroy {
 
   private loadQuestions() {
     try {
-      // Clear legacy storage v1, v2, v3, v4, v5, v6, v7 so concise portfolio questions take precedence
+      // Clear legacy storage v1, v2, v3, v4, v5, v6, v7, v8 so concise portfolio questions take precedence
       localStorage.removeItem('prom_samur_custom_questions');
       localStorage.removeItem('prom_samur_custom_questions_v2');
       localStorage.removeItem('prom_samur_custom_questions_v3');
@@ -1395,8 +1406,9 @@ export class App implements OnDestroy {
       localStorage.removeItem('prom_samur_custom_questions_v5');
       localStorage.removeItem('prom_samur_custom_questions_v6');
       localStorage.removeItem('prom_samur_custom_questions_v7');
+      localStorage.removeItem('prom_samur_custom_questions_v8');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v8');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v9');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
