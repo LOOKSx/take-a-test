@@ -35,8 +35,8 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'แนะนำตัวสั้น ๆ จบ ปวส. จากไหน สาขาอะไร เกรดเท่าไหร่?',
     importance: 'mandatory',
     importanceLabel: '🔥 เจอแน่นอน 100% (อันดับ 1)',
-    keywordHook: 'เอฟ + เทคนิคคอน เกรด 3.61 + ชอบเขียนเว็บประยุกต์ IoT + Smart Light',
-    punchline: 'สวัสดีครับอาจารย์ ผมชื่อ นายพุฒิพงศ์ ราชรักษ์ (เอฟ) รหัสสอบ 0312805627 จบ ปวส. เทคโนโลยีสารสนเทศ เทคนิคคอน เกรด 3.61 ครับ ผมชอบและชำนาญการเขียนเว็บไซต์ และชอบนำเว็บมาอะแดปเชื่อมต่อกับฮาร์ดแวร์ IoT เหมือนในโปรเจกต์ Smart Light ควบคุมไฟ 220V ครับ ตั้งใจมาต่อยอด วศ.บ.คอมฯ เทียบโอน ที่ มทร.ธัญบุรี ครับ',
+    keywordHook: 'เอฟ + เทคนิคคอน เกรด 3.61 + พัฒนา Web Application All Light 100%',
+    punchline: 'สวัสดีครับอาจารย์ ผมชื่อ นายพุฒิพงศ์ ราชรักษ์ (เอฟ) รหัสสอบ 0312805627 จบ ปวส. เทคโนโลยีสารสนเทศ เทคนิคคอน เกรด 3.61 ครับ ผมมีความชอบและชำนาญด้านการพัฒนาเว็บไซต์เป็นพิเศษ ผลงานเด่นคือพัฒนา Web Application ของระบบ All Light (allight-psi.vercel.app) เป็นเว็บ PWA ด้วย React และ Tailwind CSS ควบคุมระบบแบบ Real-time ครับ ตั้งใจมาต่อยอด วศ.บ.คอมฯ เทียบโอน ที่ มทร.ธัญบุรี ครับ',
     neverSay: 'ห้ามเล่าประวัติครอบครัว หรือเรื่องที่ไม่เกี่ยวกับสายการเรียน',
     tags: ['แนะนำตัว', 'พุฒิพงศ์', 'เอฟ', 'เกรด 3.61', 'เทคนิคคอน', 'ปวส.', 'เขียนเว็บ', 'Web Dev']
   },
@@ -75,10 +75,10 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'โครงงาน / นวัตกรรมในพอร์ตทำอะไร ใช้อะไรทำ และมีประโยชน์อย่างไร?',
     importance: 'high',
     importanceLabel: 'สำคัญมาก',
-    keywordHook: 'Smart Light IoT + 3 โหมด (Manual/Timer/LDR) + ESP32 คุมไฟ 220V',
-    punchline: 'ทำโปรเจกต์ "Smart Light IoT" (All Light) ครับ เป็นระบบคุมโคมไฟ 3 โหมด: สั่งเปิด-ปิดเอง (Manual), ตั้งเวลา (Timer), และเปิดไฟตามแสงอัตโนมัติ (Auto LDR) ใช้บอร์ด ESP32 คุม Relay 5V ตัดต่อไฟบ้าน 220V สั่งการผ่านหน้าเว็บ PWA ครับ',
-    neverSay: 'ห้ามจำชื่อโค้ดหรืออุปกรณ์ที่ตัวเองใช้ไม่ได้',
-    tags: ['Smart Light IoT', 'All Light', 'ESP32', 'Relay 220V', 'LDR', 'Web App']
+    keywordHook: 'All Light Web App + ควบคุม 3 โหมด (Manual/Timer/LDR) + React/Tailwind/PWA',
+    punchline: 'โครงงาน Smart Light IoT (All Light) ครับ โดยตัวผมรับผิดชอบพัฒนาส่วน Web Application ทั้งหมด เป็นเว็บแอป PWA ด้วย React, Vite และ Tailwind CSS มี 3 โหมดคือ สั่งเปิด-ปิดเอง (Manual), ตั้งเวลา (Timer), และเปิดไฟตามแสง (Auto LDR) แสดงสถานะ Real-time และสั่งการผ่าน REST API ครับ',
+    neverSay: 'ห้ามบอกว่าตัวเองทำฮาร์ดแวร์ถ้าไม่ได้ทำ ให้เน้นงานเว็บที่เราสร้างเอง 100%',
+    tags: ['Smart Light IoT', 'All Light', 'Web App', 'React', 'Tailwind', 'Vite', 'PWA']
   },
   {
     id: 5,
@@ -87,10 +87,10 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'ในกลุ่มโปรเจกต์มีกี่คน ตัวน้องทำหน้าที่อะไรในงานจริง?',
     importance: 'technical',
     importanceLabel: 'วัดกึ๋น (ห้ามโกหก)',
-    keywordHook: 'ทำคนเดียวทั้งหมด + ต่อ Relay 220V + เขียนโค้ด C/C++ & หน้าเว็บ',
-    punchline: 'โปรเจกต์นี้ผมทำเองทั้งหมดครับ ตั้งแต่ต่อวงจร Relay แยกไฟ 220V อย่างปลอดภัย, เขียนโค้ด ESP32 ด้วยภาษา C/C++, และพัฒนาหน้าเว็บ PWA ควบคุมอุปกรณ์ครับ',
-    neverSay: 'ห้ามพูดคลุมเครือ ต้องระบุหน้าที่วงจรและโค้ดให้ชัดเจน',
-    tags: ['หน้าที่', 'ออกแบบวงจร', 'เขียนโปรแกรม', 'Web App']
+    keywordHook: 'พัฒนา Web Application ทั้งหมด 100% (React + Tailwind + PWA + API)',
+    punchline: 'ในกลุ่มโปรเจกต์ ตัวผมรับผิดชอบพัฒนา Web Application ทั้งหมดคนเดียว 100% ครับ ตั้งแต่ออกแบบ UI/UX, เขียนโค้ดด้วย React และ Tailwind CSS, จัดการ State และคำสั่ง Real-time, ทำเป็น PWA ให้ติดตั้งลงมือถือได้, และเชื่อมต่อ API สื่อสารกับระบบครับ ส่วนฝั่งฮาร์ดแวร์เพื่อนในกลุ่มเป็นคนประกอบครับ',
+    neverSay: 'ห้ามอ้างว่าทำฮาร์ดแวร์เองถ้าไม่ได้ทำ การบอกว่าเรารับผิดชอบฝั่ง Web 100% แสดงถึงความซื่อสัตย์และเชี่ยวชาญจริง',
+    tags: ['หน้าที่', 'พัฒนาเว็บทั้งหมด', 'Web Application', 'Frontend', 'React', 'UI/UX']
   },
   {
     id: 6,
@@ -112,13 +112,13 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     id: 7,
     category: 'skills',
     categoryLabel: 'ทักษะคอมฯ',
-    question: 'ชำนาญภาษาคอมพิวเตอร์อะไรบ้าง แต่ละภาษามีตัวอย่างผลงานอย่างไร?',
+    question: 'ชำนาญภาษาเขียนเว็บไซต์และคอมพิวเตอร์อะไรบ้าง แต่ละภาษามีตัวอย่างผลงานอย่างไร?',
     importance: 'technical',
     importanceLabel: 'วัดกึ๋นทางเทคนิค',
-    keywordHook: 'ชำนาญ JavaScript (Web PWA/API) + C/C++ (ESP32/Relay 220V/LDR)',
-    punchline: 'ชำนาญ 2 ภาษาหลักครับ: (1) JavaScript/HTML/CSS ด้าน Web เช่น ทำหน้าเว็บ PWA ระบบ All Light ควบคุมสถานะ Real-time ผ่าน REST API และ (2) Embedded C/C++ ด้านฮาร์ดแวร์ เขียนบอร์ด ESP32 อ่านค่าเซนเซอร์ LDR (ADC) และสั่ง Relay 5V ตัดต่อไฟ 220V ครับ ทำให้ผมเชื่อมต่อทั้ง Web และ Hardware ได้ครบวงจรครับ',
-    neverSay: 'อย่าร่ายชื่อภาษาเยอะเกินจริงถ้าไม่เคยเขียนจริง',
-    tags: ['Coding', 'Embedded C/C++', 'JavaScript', 'Web App', 'IoT', 'ชำนาญภาษาอะไร', 'ตัวอย่างภาษา']
+    keywordHook: 'JavaScript + TypeScript + HTML/CSS (React, Tailwind CSS, Vite, PWA, REST API)',
+    punchline: 'ชำนาญภาษา JavaScript และ TypeScript รวมถึง HTML5 และ CSS3 สำหรับพัฒนา Web Application ครับ ตัวอย่างจริงคือหน้าเว็บ All Light (allight-psi.vercel.app) ที่ผมพัฒนาด้วย React + Vite และ Tailwind CSS ทำเป็น PWA มีการใช้ Fetch API เชื่อมต่อรับ-ส่งสถานะแบบ Real-time ครับ และพร้อมมาต่อยอดเรียนรู้ภาษาอื่นๆ เพิ่มเติมที่ มทร.ธัญบุรี ครับ',
+    neverSay: 'อย่าร่ายชื่อภาษาเยอะเกินจริงถ้าไม่เคยเขียนจริง เน้นสิ่งที่ชำนาญและมีงานจริงโชว์',
+    tags: ['Coding', 'JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'Tailwind', 'Vite', 'PWA', 'REST API']
   },
   {
     id: 8,
@@ -171,8 +171,8 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     question: 'ถ้าตอนเรียนต้องเจอวิชาที่ยากมากแล้วติด F หรือแก้ปัญหาโค้ดไม่ออก จะทำอย่างไร?',
     importance: 'high',
     importanceLabel: 'วัดวิธีคิด',
-    keywordHook: 'Debug ทีละสเต็ป + ไล่วงจรและโค้ด + ปรึกษาอาจารย์',
-    punchline: 'จะไล่ปัญหาทีละจุดเหมือนการ Debug โค้ดและไล่วงจรครับ ค้นคว้าด้วยตัวเองก่อน ถ้ายังติดจะรีบปรึกษาอาจารย์และติวร่วมกับเพื่อนครับ',
+    keywordHook: 'Debug ทีละสเต็ป + ไล่โค้ดและตรรกะโปรแกรม + ปรึกษาอาจารย์',
+    punchline: 'จะไล่ปัญหาทีละจุดเหมือนการ Debug โค้ดครับ ค้นคว้าด้วยตัวเองก่อน ถ้ายังติดจะรีบปรึกษาอาจารย์และติวร่วมกับเพื่อนครับ',
     neverSay: 'ห้ามตอบว่า "ทิ้งวิชานั้นไปเลย" หรือ "ช่างมัน"',
     tags: ['แก้ปัญหา', 'ทัศนคติ', 'Debugging']
   },
@@ -267,56 +267,56 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
     id: 'ai-smart-light',
     topic: 'โครงงาน Smart Light IoT (All Light) มีหลักการทำงานและจุดเด่นอย่างไร?',
     category: 'tech',
-    categoryLabel: '💡 โปรเจกต์ All Light',
+    categoryLabel: '💡 โปรเจกต์ All Light (Web App)',
     keywords: ['smart light', 'all light', 'โคมไฟ', 'หลอดไฟ', 'ไฟอัจฉริยะ', 'โปรเจกต์', 'โครงงาน', 'นวัตกรรม', 'allight'],
-    sentence1: 'เป็นระบบควบคุมโคมไฟอัจฉริยะ เชื่อมต่อบอร์ด ESP32 เข้ากับ Web App PWA ครับ',
-    sentence2: 'มี 3 โหมด: สั่งเปิด-ปิดเอง (Manual), ตั้งเวลา (Timer), และเปิดไฟตามแสงอัตโนมัติ (Auto LDR) ครับ',
-    sentence3: 'จุดเด่นคือทำงานออฟไลน์ได้ และแยกวงจรไฟบ้าน 220V ปลอดภัยในกล่อง Enclosure ครับ',
-    quickTips: '3 โหมด: สั่งเอง / ตั้งเวลา / วัดแสง + คุมไฟ 220V ผ่านเว็บ'
+    sentence1: 'เป็นโครงงานระบบควบคุมโคมไฟอัจฉริยะที่สั่งการผ่าน Web Application แบบ PWA ที่ผมพัฒนาขึ้นครับ',
+    sentence2: 'หน้าเว็บรองรับ 3 โหมด: สั่งเปิด-ปิดเอง (Manual), ตั้งเวลา (Timer), และดูสถานะแสงอัตโนมัติ (Auto LDR) ครับ',
+    sentence3: 'โดยตัวผมรับผิดชอบพัฒนา Web Application ทั้งหมด เชื่อมต่อ API สั่งการและแสดงสถานะ Real-time ครับ',
+    quickTips: 'พัฒนา Web App All Light 100% คุม 3 โหมดผ่านหน้าเว็บ PWA บน Vercel'
   },
   {
     id: 'ai-esp32-iot',
-    topic: 'ทำไมเลือกใช้บอร์ด ESP32 ในโปรเจกต์ Smart Light และเขียนโค้ดยังไง?',
+    topic: 'ระบบ All Light สื่อสารระหว่างหน้าเว็บกับอุปกรณ์อย่างไร?',
     category: 'tech',
-    categoryLabel: '💻 เทคนิคฮาร์ดแวร์',
-    keywords: ['esp32', 'esp8266', 'ไมโครคอนโทรลเลอร์', 'microcontroller', 'arduino', 'บอร์ด', 'ชิป', 'บอร์ดอะไร'],
-    sentence1: 'เลือก ESP32 เพราะมี Wi-Fi และ Bluetooth ในตัว ไม่ต้องต่อชิปเสริมครับ',
-    sentence2: 'เขียนโค้ดด้วย Embedded C/C++ สั่งขา GPIO คุม Relay และอ่านค่าแสงจาก ADC ครับ',
-    sentence3: 'ทำให้มีพื้นฐานแน่น พร้อมต่อยอดวิชา Microprocessor ที่ มทร.ธัญบุรี ครับ',
-    quickTips: 'ESP32 มี Wi-Fi ในตัว + เขียน C/C++ คุม Relay และ ADC'
+    categoryLabel: '🌐 การเชื่อมต่อ & API',
+    keywords: ['esp32', 'สื่อสาร', 'เชื่อมต่อ', 'api', 'http', 'rest api', 'รับส่งข้อมูล', 'real-time', 'คุยกันยังไง'],
+    sentence1: 'หน้าเว็บส่งคำสั่งและค่าตั้งเวลาผ่าน HTTP REST API ไปยังระบบเพื่อประมวลผลครับ',
+    sentence2: 'และรับข้อมูลสถานะไฟกับค่าความสว่างแสงกลับมาอัปเดตแสดงผลบนหน้าจอแบบ Real-time ครับ',
+    sentence3: 'ทำให้ผู้ใช้สั่งการและตรวจสอบสถานะได้ตลอดเวลาผ่านเบราว์เซอร์หรือติดตั้งเป็น PWA ครับ',
+    quickTips: 'HTTP REST API รับส่งคำสั่ง + อัปเดตสถานะแบบ Real-time'
   },
   {
     id: 'ai-relay-safety',
-    topic: 'การใช้ Relay 5V คุมไฟบ้าน 220V AC ออกแบบความปลอดภัยอย่างไร?',
+    topic: 'ในโครงงาน All Light แบ่งหน้าที่กับเพื่อนในกลุ่มอย่างไร?',
     category: 'tech',
-    categoryLabel: '⚡ ความปลอดภัยระบบไฟฟ้า',
-    keywords: ['relay', 'รีเลย์', '220v', 'ไฟบ้าน', 'ความปลอดภัย', 'ไฟดูด', 'อันตราย', 'safety', 'กระแสสลับ', 'ไฟฟ้า'],
-    sentence1: 'ใช้โมดูล Relay ที่มี Optocoupler ตัดสัญญาณไฟฟ้าแยกฝั่งไฟสูง 220V กับไฟต่ำ DC ครับ',
-    sentence2: 'แยกสายไฟ AC กับสายสัญญาณออกจากกัน หุ้มฉนวนท่อหด และลงกล่อง Enclosure ฉนวนกันดูดครับ',
-    sentence3: 'ทำให้ระบบปลอดภัย 100% ใช้งานจริงได้ตามมาตรฐานวิศวกรรมครับ',
-    quickTips: 'Optocoupler แยกไฟสูง-ต่ำ + หุ้มท่อหด + กล่อง Enclosure'
+    categoryLabel: '🤝 การแบ่งหน้าที่ในโปรเจกต์',
+    keywords: ['แบ่งหน้าที่', 'หน้าที่', 'ทำอะไร', 'กี่คน', 'รับผิดชอบ', 'ทำคนเดียว', 'relay', 'วงจร'],
+    sentence1: 'ในโปรเจกต์แบ่งหน้าที่ชัดเจนครับ ตัวผมรับผิดชอบพัฒนา Web Application ทั้งหมดคนเดียว 100% ครับ',
+    sentence2: 'ทั้งการออกแบบ UI/UX, เขียนโค้ด React, Tailwind CSS, และเชื่อมต่อ API สื่อสารกับระบบครับ',
+    sentence3: 'ส่วนเพื่อนในกลุ่มรับผิดชอบงานประกอบฮาร์ดแวร์และวงจรครับ',
+    quickTips: 'ตัวผมทำ Web Application ทั้งหมด 100% + เพื่อนทำฝั่งฮาร์ดแวร์'
   },
   {
     id: 'ai-ldr-sensor',
-    topic: 'เซนเซอร์วัดแสง LDR ทำงานอย่างไร และแปลงค่าอย่างไร?',
+    topic: 'หน้าเว็บ All Light แสดงผลค่าเซนเซอร์และการทำงานของโหมดวัดแสงอย่างไร?',
     category: 'tech',
-    categoryLabel: '💻 เทคนิคฮาร์ดแวร์',
-    keywords: ['ldr', 'แสง', 'วัดแสง', 'เซนเซอร์', 'sensor', 'ambient', 'lux', 'adc', 'อนาล็อก', 'ความสว่าง'],
-    sentence1: 'ต่อ LDR ร่วมกับตัวต้านทาน 10k โอห์ม เป็นวงจรแบ่งแรงดัน (Voltage Divider) ครับ',
-    sentence2: 'บอร์ด ESP32 แปลงแรงดันอนาล็อกเป็นค่าดิจิทัล 0–4095 ผ่านขา ADC 12-bit ครับ',
-    sentence3: 'ใส่ Hysteresis ในโค้ด เพื่อป้องกันหลอดไฟกระพริบตอนความสว่างก้ำกึ่งครับ',
-    quickTips: 'Voltage Divider 10k + ADC 0-4095 + ใส่ Hysteresis กันไฟกระพริบ'
+    categoryLabel: '💡 ระบบหน้าเว็บ & โหมดวัดแสง',
+    keywords: ['ldr', 'แสง', 'วัดแสง', 'เซนเซอร์', 'sensor', 'ambient', 'lux', 'หน้าเว็บแสดงผล', 'auto ldr'],
+    sentence1: 'หน้าเว็บจะดึงค่าระดับแสงผ่าน API มาแสดงผลสถานะบน Dashboard แบบ Real-time ครับ',
+    sentence2: 'เมื่ออยู่ในโหมด Auto LDR หน้าเว็บจะแสดงสถานะว่าระบบเปิดหรือปิดไฟตามเกณฑ์ความสว่างครับ',
+    sentence3: 'ช่วยให้ผู้ใช้ตรวจสอบได้ทันทีว่าเซนเซอร์ทำงานปกติและไฟติดดับถูกต้องครับ',
+    quickTips: 'หน้าเว็บดึงค่าแสงผ่าน API มาโชว์สถานะ Real-time'
   },
   {
     id: 'ai-allight-web',
-    topic: 'สถาปัตยกรรม Web App All Light และ Backend ออกแบบอย่างไร?',
+    topic: 'สถาปัตยกรรม Web App All Light ออกแบบอย่างไร และใช้เทคโนโลยีอะไรบ้าง?',
     category: 'tech',
-    categoryLabel: '🌐 ซอฟต์แวร์ & คลาวด์',
-    keywords: ['allight', 'web app', 'เว็บ', 'frontend', 'backend', 'golang', 'pwa', 'service worker', 'vercel'],
-    sentence1: 'ทำเป็น Progressive Web App (PWA) ลงมือถือได้ และทำงานออฟไลน์ผ่าน Service Worker ครับ',
-    sentence2: 'มี Backend ด้วยภาษา Go รองรับ REST API ซิงก์สถานะไฟแบบ Real-time ครับ',
-    sentence3: 'ทำให้เข้าใจการเชื่อมต่อ IoT ครบวงจรตั้งแต่ฮาร์ดแวร์จนถึงคลาวด์บน Vercel ครับ',
-    quickTips: 'PWA ทำงานออฟไลน์ + Go REST API + Deploy บน Vercel'
+    categoryLabel: '🌐 สถาปัตยกรรม Web App',
+    keywords: ['allight', 'web app', 'เว็บ', 'frontend', 'react', 'tailwind', 'vite', 'pwa', 'service worker', 'vercel'],
+    sentence1: 'พัฒนาด้วย React + Vite และจัดรูปแบบด้วย Tailwind CSS เพื่อความเร็วและ Responsive ครับ',
+    sentence2: 'ทำเป็น Progressive Web App (PWA) มี Manifest ให้ติดตั้งลงบนมือถือได้เหมือน Native App ครับ',
+    sentence3: 'Deploy บน Vercel และเชื่อมต่อ REST API ควบคุมอุปกรณ์แบบ Real-time ครับ',
+    quickTips: 'React + Vite + Tailwind CSS + PWA + Deploy บน Vercel'
   },
   {
     id: 'ai-internship-2places',
@@ -496,14 +496,14 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
   },
   {
     id: 'ai-programming-languages-detail',
-    topic: 'ชำนาญภาษาคอมพิวเตอร์อะไรบ้าง และมีตัวอย่างการประยุกต์ใช้งานอย่างไร?',
+    topic: 'ชำนาญภาษาเขียนเว็บไซต์อะไรบ้าง และมีตัวอย่างการประยุกต์ใช้งานอย่างไร?',
     category: 'tech',
-    categoryLabel: '💻 ภาษาที่ชำนาญ & ตัวอย่าง',
-    keywords: ['ชำนาญภาษา', 'ถนัดภาษา', 'ภาษาอะไรบ้าง', 'ตัวอย่างภาษา', 'เขียนภาษาอะไร', 'javascript', 'c++', 'c language', 'ภาษาคอม', 'ตัวอย่างโค้ด'],
-    sentence1: 'ภาษาแรกคือ JavaScript/HTML/CSS ครับ ชำนาญการสร้าง Web App และ PWA ตัวอย่างคือหน้าเว็บ All Light ที่เชื่อมต่อ API ควบคุมแบบ Real-time ครับ',
-    sentence2: 'ภาษาที่สองคือ C/C++ ครับ ชำนาญการเขียนบอร์ด ESP32 ตัวอย่างคือโค้ดอ่านค่าแสง LDR แปลงผ่าน ADC และสั่งตัดต่อ Relay คุมไฟบ้าน 220V ครับ',
-    sentence3: 'จุดเด่นของผมคือการนำ Web มาอะแดปเชื่อมต่อกับ Hardware ได้จริง และพร้อมต่อยอดภาษาเชิงลึกอย่าง Python และ C++ ที่ มทร.ธัญบุรี ครับ',
-    quickTips: 'JS (Web App/API Real-time) + C/C++ (ESP32/LDR ADC/Relay 220V)'
+    categoryLabel: '🌐 ภาษาเขียนเว็บ & ตัวอย่าง',
+    keywords: ['ชำนาญภาษา', 'ถนัดภาษา', 'ภาษาอะไรบ้าง', 'ตัวอย่างภาษา', 'เขียนภาษาอะไร', 'javascript', 'typescript', 'html', 'css', 'react', 'ภาษาเขียนเว็บ', 'ตัวอย่างโค้ด'],
+    sentence1: 'ชำนาญ JavaScript และ TypeScript ร่วมกับ HTML5 และ CSS3 เป็นหลักในการพัฒนา Web Application ครับ',
+    sentence2: 'ตัวอย่างจริงคือหน้าเว็บ All Light ที่ใช้ React + Vite และ Tailwind CSS จัดการ State ปุ่มกดและเชื่อมต่อ REST API แบบ Real-time ครับ',
+    sentence3: 'และทำโครงสร้าง PWA มี Manifest ให้ติดตั้งลงมือถือได้ พร้อมต่อยอดสู่ Full-stack และวิศวกรรมคอมพิวเตอร์ครับ',
+    quickTips: 'JavaScript + TypeScript + React + Tailwind CSS + PWA + REST API'
   }
 ];
 
@@ -690,7 +690,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v9', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v10', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -1398,7 +1398,7 @@ export class App implements OnDestroy {
 
   private loadQuestions() {
     try {
-      // Clear legacy storage v1, v2, v3, v4, v5, v6, v7, v8 so concise portfolio questions take precedence
+      // Clear legacy storage v1-v9 so concise portfolio questions take precedence
       localStorage.removeItem('prom_samur_custom_questions');
       localStorage.removeItem('prom_samur_custom_questions_v2');
       localStorage.removeItem('prom_samur_custom_questions_v3');
@@ -1407,8 +1407,9 @@ export class App implements OnDestroy {
       localStorage.removeItem('prom_samur_custom_questions_v6');
       localStorage.removeItem('prom_samur_custom_questions_v7');
       localStorage.removeItem('prom_samur_custom_questions_v8');
+      localStorage.removeItem('prom_samur_custom_questions_v9');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v9');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v10');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
