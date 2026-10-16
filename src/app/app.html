@@ -227,6 +227,8 @@
               <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(13)">📜 13. เกียรติบัตร (5 ใบ)</button>
               <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(14)">⚖️ 14. ข้อดี - ข้อเสีย</button>
               <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(15)">📚 15. วิศวะคอมฯ เรียนอะไร</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(16)">💔 16. ถ้าไม่ได้เข้าที่นี่</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(17)">🤝 17. กิจกรรม & ROV</button>
               <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Smart Light')">💡 All Light 3 โหมด</button>
               <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ESP32')">⚡ ESP32 & Relay 220V</button>
               <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('LDR')">☀️ เซนเซอร์ LDR (ADC)</button>
@@ -236,7 +238,7 @@
           </div>
         </div>
 
-        <!-- AUTO-MATCHED POPUP CARD 1: สำหรับคำถามหลัก 1-15 ข้อ -->
+        <!-- AUTO-MATCHED POPUP CARD 1: สำหรับคำถามหลัก 1-17 ข้อ -->
         @if (speechMatchedQuestion()) {
           <div class="matched-answer-box animate-fade-in">
             <div class="matched-header">

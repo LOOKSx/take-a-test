@@ -223,6 +223,30 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     punchline: 'ทราบครับ เรียนครอบคลุม 3 ด้าน: ฮาร์ดแวร์ (Microcontroller, Embedded Systems), ซอฟต์แวร์ (Data Structures, OS, การเขียนโปรแกรม), และเน็ตเวิร์ก/ความปลอดภัย ผสานกับการคำนวณทางวิศวกรรมเพื่อออกแบบระบบที่สมบูรณ์ครับ',
     neverSay: 'ห้ามตอบว่า "คิดว่าเหมือนวิทยาการคอมฯ ทั่วไป"',
     tags: ['วิศวะคอมฯ เรียนอะไร', 'หลักสูตร', 'Hardware', 'Software', 'Embedded']
+  },
+  {
+    id: 16,
+    category: 'extra',
+    categoryLabel: 'ทัศนคติ & ความมุ่งมั่น',
+    question: 'ถ้าคุณไม่ได้เข้าที่นี่ / ถ้าผลสัมภาษณ์รอบนี้ไม่ผ่าน จะทำอย่างไรต่อไป?',
+    importance: 'high',
+    importanceLabel: 'วัดความมุ่งมั่น',
+    keywordHook: 'มุ่งมั่นที่ มทร.ธัญบุรี ที่เดียว + ขอคำแนะนำนำไปปรับปรุง + ยื่นรอบถัดไป',
+    punchline: 'ถ้าไม่ได้รอบนี้ ผมจะขอคำแนะนำจากอาจารย์เพื่อนำไปปรับปรุงพัฒนาตัวเอง และจะกลับมาสมัครในรอบถัดไปแน่นอนครับ เพราะเป้าหมายเดียวของผมคือ วศ.บ.คอมฯ มทร.ธัญบุรี แต่วันนี้ผมเตรียมตัวมา 100% และหวังว่าจะได้รับโอกาสตั้งแต่รอบนี้ครับ',
+    neverSay: 'ห้ามตอบว่า "ก็ไปเรียนที่อื่น" หรือ "คงไม่เรียนแล้ว"',
+    tags: ['ถ้าไม่ได้ที่นี่', 'ถ้าไม่ผ่าน', 'รอบถัดไป', 'ความมุ่งมั่น', 'ทัศนคติ']
+  },
+  {
+    id: 17,
+    category: 'extra',
+    categoryLabel: 'กิจกรรม & ทีมเวิร์ก',
+    question: 'เคยทำกิจกรรมอะไรบ้างตอนเรียน (วัดการทำงานเป็นทีม / Teamwork)?',
+    importance: 'high',
+    importanceLabel: 'วัด Teamwork',
+    keywordHook: 'จิตอาสาน้ำท่วมหาดใหญ่ + STAFF กีฬาสี/เชิดมังกร + แข่ง eSports ROV รองชนะเลิศ',
+    punchline: 'เคยร่วมจิตอาสาช่วยเหลือน้ำท่วมหาดใหญ่ สงขลา ช่วยลำเลียงถุงยังชีพครับ และเป็น STAFF กีฬาสี ร่วมเชิดมังกร รวมถึงแข่ง eSports ROV ได้รองชนะเลิศ สอนเรื่องการวางแผนกลยุทธ์เป็นทีมและการทำงานร่วมกับผู้อื่นครับ',
+    neverSay: 'ห้ามตอบว่า "ไม่เคยทำกิจกรรมอะไรเลย วันๆ เอาแต่อยู่คนเดียว"',
+    tags: ['กิจกรรม', 'จิตอาสา', 'น้ำท่วมหาดใหญ่', 'eSports ROV', 'เชิดมังกร', 'ทีมเวิร์ก']
   }
 ];
 
@@ -655,7 +679,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v7', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v8', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -1028,6 +1052,10 @@ export class App implements OnDestroy {
       matched = list.find(q => q.id === 14);
     } else if (lower.includes('เรียนอะไร') || lower.includes('สาขานี้') || lower.includes('หลักสูตร') || lower.includes('วิชาที่เรียน')) {
       matched = list.find(q => q.id === 15);
+    } else if (lower.includes('ไม่ผ่าน') || lower.includes('ไม่ได้ที่นี่') || lower.includes('ไม่ติด') || lower.includes('สำรอง') || lower.includes('ไม่ได้เข้า') || lower.includes('ตกสัมภาษณ์')) {
+      matched = list.find(q => q.id === 16);
+    } else if (lower.includes('กิจกรรม') || lower.includes('จิตอาสา') || lower.includes('น้ำท่วม') || lower.includes('rov') || lower.includes('esport') || lower.includes('ทีมเวิร์ก') || lower.includes('กีฬาสี') || lower.includes('มังกร')) {
+      matched = list.find(q => q.id === 17);
     } else {
       matched = list.find(q =>
         lower.split(' ').some(w => w.length > 2 && (q.question.toLowerCase().includes(w) || q.keywordHook.toLowerCase().includes(w)))
@@ -1359,15 +1387,16 @@ export class App implements OnDestroy {
 
   private loadQuestions() {
     try {
-      // Clear legacy storage v1, v2, v3, v4, v5, v6 so concise portfolio questions take precedence
+      // Clear legacy storage v1, v2, v3, v4, v5, v6, v7 so concise portfolio questions take precedence
       localStorage.removeItem('prom_samur_custom_questions');
       localStorage.removeItem('prom_samur_custom_questions_v2');
       localStorage.removeItem('prom_samur_custom_questions_v3');
       localStorage.removeItem('prom_samur_custom_questions_v4');
       localStorage.removeItem('prom_samur_custom_questions_v5');
       localStorage.removeItem('prom_samur_custom_questions_v6');
+      localStorage.removeItem('prom_samur_custom_questions_v7');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v7');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v8');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
