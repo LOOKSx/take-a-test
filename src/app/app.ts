@@ -18,7 +18,7 @@ export interface InterviewQuestion {
 
 export interface ChecklistItem {
   id: string;
-  category: 'line' | 'docs' | 'setup';
+  category: 'zoom' | 'line' | 'docs' | 'setup';
   title: string;
   description: string;
   urgent?: boolean;
@@ -442,7 +442,7 @@ export class App implements OnDestroy {
     githubRepo: 'https://github.com/LOOKSx/take-a-test.git',
     internship: 'บริษัท โปรเกรส เน็ตเวิร์ค คอนซัลท์ จำกัด (IT Support Technician)',
     featuredProjects: 'Todaprime (Angular 19 + Golang REST API) & Enterprise Network Architecture',
-    interviewDate: 'วันศุกร์ที่ 17 ตุลาคม 2569 (เริ่มโทรสัมภาษณ์ 09.00 น.)',
+    interviewDate: 'วันเสาร์ที่ 17 ตุลาคม 2569 (Zoom สัมภาษณ์ 09.00 น.)',
   };
 
   // Speech Recognition & Live Audio Monitor
@@ -505,60 +505,74 @@ export class App implements OnDestroy {
   // Checklist Items
   readonly officialChecklist: ChecklistItem[] = [
     {
-      id: 'line-group',
-      category: 'line',
-      title: 'สแกน QR Code เข้ากลุ่ม LINE "04 สัมภาษณ์ โควตา 70"',
-      description: 'สแกนจากหน้า 3 ของประกาศ และพิมพ์แจ้ง "รหัสสอบ - ชื่อ นามสกุล - สาขาวิศวะคอมฯ เทียบโอน" ในกลุ่มไลน์ทันที',
+      id: 'zoom-name',
+      category: 'zoom',
+      title: 'ตั้งชื่อ Display Name ใน Zoom: "28_0312805627_นายพุฒิพงศ์ ราชรักษ์"',
+      description: 'รูปแบบ: ลำดับ_รหัสประจำตัวสอบ_ชื่อ-นามสกุล เพื่อให้อาจารย์กดรับจาก Waiting Room เข้าสัมภาษณ์ได้ตรงคิว',
       urgent: true
     },
     {
-      id: 'line-standby',
-      category: 'line',
-      title: 'สแตนด์บายรอสายตั้งแต่ 08.30 น. (วันเสาร์ที่ 17 ต.ค.)',
-      description: 'กรรมการจะเริ่มโทรหาตั้งแต่ 09.00 น. เป็นต้นไป (ทางโทรศัพท์ หรือ LINE VDO Call) ชาร์จแบตเตอรี่โทรศัพท์ให้เต็ม 100%',
+      id: 'zoom-test-av',
+      category: 'zoom',
+      title: 'ทดสอบกล้อง Webcam และไมโครโฟนใน Zoom Settings',
+      description: 'กด Test Speaker & Microphone ในหน้าตั้งค่า Zoom และตรวจสอบให้แน่ใจว่าได้ยินเสียงชัดเจนและภาพไม่มืด',
       urgent: true
     },
     {
-      id: 'line-missed',
+      id: 'line-zoom-link',
       category: 'line',
-      title: 'หากถึง 13.00 น. ยังไม่มีใครติดต่อมา ให้ติดต่อกลับทันที',
-      description: 'ตามเอกสารระบุ: ถ้าถึงบ่ายโมงยังไม่ได้รับการติดต่อ ให้โทรกลับตามเบอร์อาจารย์ในกลุ่มไลน์',
+      title: 'รับลิงก์ Zoom / Meeting ID & Passcode ในกลุ่ม LINE "04 สัมภาษณ์ โควตา 70"',
+      description: 'สแตนด์บายติดตามประกาศในกลุ่มไลน์ช่วงเช้า อาจารย์จะส่งลิงก์ Zoom เข้าห้องสัมภาษณ์ให้',
+      urgent: true
+    },
+    {
+      id: 'zoom-waiting',
+      category: 'zoom',
+      title: 'เข้าห้อง Zoom Waiting Room สแตนด์บายล่วงหน้า (08.30 - 08.45 น.)',
+      description: 'กรรมการจะเริ่มรันคิวสัมภาษณ์ทีละคนตั้งแต่ 09.00 น. เป็นต้นไป ห้ามเข้าสายเด็ดขาด',
       urgent: true
     },
     {
       id: 'docs-id',
       category: 'docs',
       title: 'บัตรประชาชนตัวจริง (ยังไม่หมดอายุ)',
-      description: 'วางไว้ข้างตัวเพื่อโชว์หน้ากล้อง หรือยืนยันตัวตนกับอาจารย์',
-      urgent: false
+      description: 'วางไว้ข้างตัวเพื่อยกโชว์หน้ากล้อง Zoom ยืนยันตัวตนกับคณะกรรมการ',
+      urgent: true
     },
     {
       id: 'docs-grade',
       category: 'docs',
-      title: 'สำเนาใบแสดงผลการเรียน (Transcript ปวส.) ภาคเรียนล่าสุด',
-      description: 'เตรียมไว้ดูเกรดเฉลี่ยหรือสาขาวิชาหากกรรมการสอบถาม',
+      title: 'สำเนาใบแสดงผลการเรียน (Transcript ปวส.) สาขาเทคโนโลยีสารสนเทศ',
+      description: 'เตรียมไว้ดูเกรดเฉลี่ยหรือสาขาวิชาหากกรรมการสอบถามเรื่องรายวิชาที่เรียนมา',
       urgent: false
     },
     {
       id: 'docs-port',
       category: 'docs',
-      title: 'Portfolio หรือรูปโปรเจกต์ ปวส. (ถ้ามี)',
-      description: 'เซฟรูปชิ้นงานโปรเจกต์ไว้ในมือถือ/คอม เผื่อส่งในไลน์หรือเปิดให้ดู',
+      title: 'โปรเจกต์ Todaprime & ผลงานฝึกงาน (เตรียมไว้เผื่อแชร์หน้าจอ)',
+      description: 'เปิดเว็บ Todaprime หรือสไลด์นำเสนอผลการฝึกงานสแตนด์บายไว้ เผื่อกรรมการขอให้ Share Screen',
       urgent: false
     },
     {
       id: 'setup-dress',
       category: 'setup',
-      title: 'แต่งกายชุดนักเรียน/นักศึกษาเดิม หรือชุดสุภาพ',
+      title: 'แต่งกายชุดนักเรียน/นักศึกษาเดิม หรือชุดเชิ้ตสุภาพ',
       description: 'ประกาศระบุชัดเจน: **ห้ามใส่เสื้อยืด กางเกงยีนส์** เด็ดขาด!',
       urgent: true
     },
     {
       id: 'setup-quiet',
       category: 'setup',
-      title: 'หาสถานที่เงียบ ไม่มีเสียงรบกวน แสงสว่างส่องหน้า',
-      description: 'เตรียมหูฟังสมอลทอล์กเพื่อให้ได้ยินเสียงอาจารย์ชัดเจน',
+      title: 'จัดมุมกล้องระดับสายตา แสงสว่างส่องใบหน้า และห้องเงียบไม่มีเสียงแทรก',
+      description: 'ตั้งหน้าต่าง Zoom ไว้ด้านบนใกล้รูกล้อง และเปิดเว็บ "พร้อมเสมอ" ไว้ด้านล่างเพื่ออ่านโพยได้อย่างเป็นธรรมชาติ',
       urgent: false
+    },
+    {
+      id: 'line-missed',
+      category: 'line',
+      title: 'หากถึง 13.00 น. ยังไม่ได้รับการเรียกสัมภาษณ์ ให้ติดต่ออาจารย์ทันที',
+      description: 'ตามเอกสารระบุ: ถ้าถึงบ่ายโมงยังไม่ได้รับการสัมภาษณ์ ให้รีบพิมพ์แจ้งในกลุ่มไลน์ทันที',
+      urgent: true
     }
   ];
 
