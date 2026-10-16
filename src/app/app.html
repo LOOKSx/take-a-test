@@ -222,6 +222,7 @@
               <button type="button" class="chip-action" (click)="selectQuickKeyword(8)">📐 8. เกรด 3.61/เลข</button>
               <button type="button" class="chip-action" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี</button>
               <button type="button" class="chip-action" (click)="selectQuickKeyword(10)">🎯 10. IoT Engineer</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(13)">📜 13. เกียรติบัตร (5 ใบ)</button>
               <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Smart Light')">💡 All Light 3 โหมด</button>
               <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('ESP32')">⚡ ESP32 & Relay 220V</button>
               <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('LDR')">☀️ เซนเซอร์ LDR (ADC)</button>
@@ -231,7 +232,7 @@
           </div>
         </div>
 
-        <!-- AUTO-MATCHED POPUP CARD 1: สำหรับคำถามหลัก 1-12 ข้อ -->
+        <!-- AUTO-MATCHED POPUP CARD 1: สำหรับคำถามหลัก 1-13 ข้อ -->
         @if (speechMatchedQuestion()) {
           <div class="matched-answer-box animate-fade-in">
             <div class="matched-header">

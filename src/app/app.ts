@@ -187,6 +187,18 @@ const DEFAULT_QUESTIONS: InterviewQuestion[] = [
     punchline: 'อยากสอบถามอาจารย์ครับว่า สำหรับเด็กเทียบโอนที่สนใจด้าน Embedded Systems และ IoT ทางภาควิชามีแล็บวิจัยหรือกลุ่มโปรเจกต์ตัวไหนที่สามารถเข้าไปช่วยงานได้ตั้งแต่ปีแรกบ้างครับ',
     neverSay: 'ห้ามตอบว่า "ไม่มีครับ" (การถามคำถามแสดงถึงความสนใจจริง)',
     tags: ['คำถามปิดท้าย', 'การเตรียมตัว', 'แล็บวิจัย', 'IoT']
+  },
+  {
+    id: 13,
+    category: 'skills',
+    categoryLabel: 'เกียรติบัตร & ใบเซอร์',
+    question: 'เกียรติบัตรและใบรับรองในพอร์ต (หน้า 5-6) มีอะไรบ้าง ได้เรียนรู้อะไรมา?',
+    importance: 'high',
+    importanceLabel: 'สำคัญมาก',
+    keywordHook: 'เกียรติบัตร 5 ใบ: ฝึกงาน 2 แห่ง + อบรมไซเบอร์ + การเข้ารหัส ม.เกษตรฯ',
+    punchline: 'ในพอร์ตมี 2 ส่วนครับ: ฝึกงาน 2 แห่ง (บ.โปรเกรส ด้านซอฟต์แวร์ และ ศาลจังหวัด ด้านระบบสารสนเทศ) และใบรับรองอบรมออนไลน์ 3 ใบ ด้าน Cybersecurity, ไอทีเพื่อชีวิต และการเข้ารหัสประยุกต์ ม.เกษตรฯ ซึ่งช่วยให้ผมคำนึงถึงความปลอดภัยของข้อมูลในระบบ IoT ครับ',
+    neverSay: 'ห้ามจำไม่ได้ว่าตัวเองใส่เกียรติบัตรอะไรไปในพอร์ต',
+    tags: ['เกียรติบัตร', 'ใบรับรอง', 'certificate', 'Cybersecurity', 'Cryptography', 'ฝึกงาน', 'KU MOOC']
   }
 ];
 
@@ -270,11 +282,22 @@ export const AI_KNOWLEDGE_BANK: AiSentenceAnswer[] = [
     quickTips: 'บ.โปรเกรส (ซอฟต์แวร์/ไอที) + ศาลจังหวัดคอน (สารสนเทศ)'
   },
   {
+    id: 'ai-certificates-all',
+    topic: 'เกียรติบัตรทั้งหมดในแฟ้มสะสมผลงาน (หน้า 5-6) มีอะไรบ้างและนำมาใช้อย่างไร?',
+    category: 'academic',
+    categoryLabel: '📜 เกียรติบัตรทั้งหมด',
+    keywords: ['เกียรติบัตร', 'ใบเซอร์', 'ใบประกาศ', 'ผลงานที่ได้รับ', 'รางวัล', 'ใบรับรองทั้งหมด', 'เกียรติบัตรทั้งหมด'],
+    sentence1: 'ในพอร์ตมี 5 ใบหลักครับ คือ ฝึกงาน 2 แห่ง และอบรมออนไลน์ 3 หลักสูตรครับ',
+    sentence2: 'ฝึกงานที่ บ.โปรเกรส (ซอฟต์แวร์) และ ศาลจังหวัด (ระบบสารสนเทศ) ได้ทักษะแก้ปัญหาหน้างานจริงครับ',
+    sentence3: 'ส่วนอบรมได้ Cybersecurity และ Cryptography ม.เกษตรฯ ช่วยเสริมเรื่องความปลอดภัยของระบบ IoT ครับ',
+    quickTips: 'ฝึกงาน 2 แห่ง + อบรมไซเบอร์ & การเข้ารหัส KU MOOC'
+  },
+  {
     id: 'ai-cyber-crypto',
     topic: 'ใบรับรอง Cybersecurity และ Cryptography ได้เรียนรู้อะไรมาบ้าง?',
     category: 'academic',
     categoryLabel: '📜 ใบรับรองทางวิชาการ',
-    keywords: ['ใบประกาศ', 'ใบรับรอง', 'certificate', 'อบรม', 'cybersecurity', 'ไซเบอร์', 'cryptography', 'การเข้ารหัส', 'thai mooc', 'เกษตร'],
+    keywords: ['ใบประกาศ', 'ใบรับรอง', 'certificate', 'อบรม', 'cybersecurity', 'ไซเบอร์', 'cryptography', 'การเข้ารหัส', 'thai mooc', 'เกษตร', 'ku mooc', 'ใบเซอร์', 'เกียรติบัตร'],
     sentence1: 'ผ่านอบรม 3 ใบ: ไซเบอร์ Thai MOOC 6 ชม., ไอทีเพื่อชีวิต 24 ชม., และการเข้ารหัส ม.เกษตรฯ ครับ',
     sentence2: 'ได้เรียนรู้การป้องกันภัย Phishing และหลักการเข้ารหัสข้อมูลพื้นฐานครับ',
     sentence3: 'ช่วยให้ผมคำนึงถึงความปลอดภัยของข้อมูลในการพัฒนาระบบ IoT ครับ',
@@ -586,7 +609,7 @@ export class App implements OnDestroy {
     effect(() => {
       const qs = this.questions();
       try {
-        localStorage.setItem('prom_samur_custom_questions_v4', JSON.stringify(qs));
+        localStorage.setItem('prom_samur_custom_questions_v5', JSON.stringify(qs));
       } catch (e) {}
     });
 
@@ -953,6 +976,8 @@ export class App implements OnDestroy {
       matched = list.find(q => q.id === 11);
     } else if (lower.includes('ถามอะไร') || lower.includes('สงสัย') || lower.includes('เพิ่มเติม') || lower.includes('ปิดท้าย')) {
       matched = list.find(q => q.id === 12);
+    } else if (lower.includes('เกียรติบัตร') || lower.includes('ใบประกาศ') || lower.includes('ใบรับรอง') || lower.includes('certificate') || lower.includes('ใบเซอร์') || lower.includes('ไซเบอร์') || lower.includes('cryptography') || lower.includes('เข้ารหัส') || lower.includes('mooc')) {
+      matched = list.find(q => q.id === 13);
     } else {
       matched = list.find(q =>
         lower.split(' ').some(w => w.length > 2 && (q.question.toLowerCase().includes(w) || q.keywordHook.toLowerCase().includes(w)))
@@ -1284,12 +1309,13 @@ export class App implements OnDestroy {
 
   private loadQuestions() {
     try {
-      // Clear legacy storage v1, v2, v3 so concise portfolio questions take precedence
+      // Clear legacy storage v1, v2, v3, v4 so concise portfolio questions take precedence
       localStorage.removeItem('prom_samur_custom_questions');
       localStorage.removeItem('prom_samur_custom_questions_v2');
       localStorage.removeItem('prom_samur_custom_questions_v3');
+      localStorage.removeItem('prom_samur_custom_questions_v4');
 
-      const saved = localStorage.getItem('prom_samur_custom_questions_v4');
+      const saved = localStorage.getItem('prom_samur_custom_questions_v5');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
