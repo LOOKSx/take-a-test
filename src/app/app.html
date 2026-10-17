@@ -208,32 +208,65 @@
             </div>
           }
 
-          <!-- 1-CLICK QUICK SHORTCUT CHIPS (ปุ่มลัดคลิกเดียว คำตอบเด้งทันที!) -->
+          <!-- 1-CLICK QUICK SHORTCUT CHIPS (ปุ่มลัดคลิกเดียว เรียงตามความสำคัญจากมากไปน้อย!) -->
           <div class="quick-chips-wrapper">
-            <span class="chips-label">⚡ หรือกดปุ่มลัด 1 คลิก (คำตอบเด้งทันที ไม่ต้องพูด):</span>
-            <div class="chips-list">
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(1)">👤 1. แนะนำตัว (100%)</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(2)">🏫 2. ทำไมเลือก มทร. (100%)</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(3)">✅ 3. ถ้าติดเอาไหม (100%)</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(4)">💡 4. All Light Web App</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(5)">💻 5. หน้าที่ทำเว็บ 100%</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน 2 แห่ง</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(7)">🌐 7. ภาษาเขียนเว็บ (Angular/TS)</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(8)">📐 8. เกรด 3.61/เลข</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(10)">🎯 10. IoT Engineer</button>
-              <button type="button" class="chip-action" (click)="selectQuickKeyword(11)">⚠️ 11. เจอปัญหายาก/ติด F</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(12)">❓ 12. ถามอาจารย์ (ปิดท้าย)</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(13)">📜 13. เกียรติบัตร (5 ใบ)</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(14)">⚖️ 14. ข้อดี - ข้อเสีย</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(15)">📚 15. วิศวะคอมฯ เรียนอะไร</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(16)">💔 16. ถ้าไม่ได้เข้าที่นี่</button>
-              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(17)">🤝 17. กิจกรรม & ROV</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('All Light')">💡 All Light 3 โหมด</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('API')">⚡ REST API & Real-time</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Angular')">🅰️ Angular & PWA</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Cybersecurity')">📜 อบรม Cyber & Crypto</button>
-              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('จิตอาสา')">🤝 จิตอาสา & eSports</button>
+            <span class="chips-label">⚡ ปุ่มลัดคลิกเดียว (เรียงตามลำดับความสำคัญ ชี้ชะตา ➡️ สกิล ➡️ ทัศนคติ ➡️ ปิดท้าย):</span>
+
+            <!-- TIER 1: ด่วนที่สุด ชี้ชะตา 100% -->
+            <div class="chips-tier-row tier-1-row">
+              <span class="tier-pill-label tier-1-pill">🔴 ด่วนที่สุด (ชี้ชะตา):</span>
+              <div class="chips-list">
+                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(1)">👤 1. แนะนำตัว (100%)</button>
+                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(3)">✅ 3. ถ้าติดเอาไหม (100%)</button>
+                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(5)">💻 5. หน้าที่ทำเว็บ 100%</button>
+                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(4)">💡 4. All Light Web App</button>
+                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี (ไม่มีงานประจำ)</button>
+              </div>
+            </div>
+
+            <!-- TIER 2: สกิลเทคนิค & วิชาการ -->
+            <div class="chips-tier-row tier-2-row">
+              <span class="tier-pill-label tier-2-pill">🟠 สกิล & วิชาการ:</span>
+              <div class="chips-list">
+                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(7)">🌐 7. ภาษาเขียนเว็บ (Angular/TS)</button>
+                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(8)">📐 8. เกรด 3.61/เลขคำนวณ</button>
+                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(2)">🏫 2. ทำไมเลือก มทร. (100%)</button>
+                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(15)">📚 15. วิศวะคอมฯ เรียนอะไร</button>
+              </div>
+            </div>
+
+            <!-- TIER 3: ทัศนคติ & แก้ปัญหา -->
+            <div class="chips-tier-row tier-3-row">
+              <span class="tier-pill-label tier-3-pill">🟡 ทัศนคติ & แก้ปัญหา:</span>
+              <div class="chips-list">
+                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(16)">💔 16. ถ้าไม่ได้เข้าที่นี่</button>
+                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(14)">⚖️ 14. ข้อดี - ข้อเสีย</button>
+                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(11)">⚠️ 11. เจอปัญหายาก/ติด F</button>
+                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(10)">🎯 10. IoT Engineer (อาชีพ)</button>
+              </div>
+            </div>
+
+            <!-- TIER 4: ถามอาจารย์ & กิจกรรมเก็บแต้ม -->
+            <div class="chips-tier-row tier-4-row">
+              <span class="tier-pill-label tier-4-pill">🟢 ถามอาจารย์ & กิจกรรม:</span>
+              <div class="chips-list">
+                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(12)">❓ 12. ถามอาจารย์ (ปิดท้าย)</button>
+                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน 2 แห่ง</button>
+                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(17)">🤝 17. กิจกรรม & ROV</button>
+                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(13)">📜 13. เกียรติบัตร (5 ใบ)</button>
+              </div>
+            </div>
+
+            <!-- TIER 5: บอท AI สรุปบทตอบ 3 ประโยค -->
+            <div class="chips-tier-row tier-ai-row">
+              <span class="tier-pill-label tier-ai-pill">🤖 ผู้ช่วย AI ช่วยตอบสด:</span>
+              <div class="chips-list">
+                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Angular')">🅰️ Angular & PWA</button>
+                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('All Light')">💡 All Light 3 โหมด</button>
+                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('API')">⚡ REST API & Real-time</button>
+                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Cybersecurity')">📜 อบรม Cyber & Crypto</button>
+                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('จิตอาสา')">🤝 จิตอาสา & eSports</button>
+              </div>
             </div>
           </div>
         </div>
