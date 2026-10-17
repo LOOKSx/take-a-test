@@ -94,179 +94,47 @@
     </div>
   </section>
 
-  <!-- VOICE & 1-CLICK ASSISTANT HUD (ระบบดักฟังเสียง & ปุ่มลัดดึงคำตอบทันที) -->
+  <!-- 1-CLICK ASSISTANT HUD (ปุ่มลัดดึงคำตอบทันที เรียงตามลำดับความสำคัญ) -->
   <section class="voice-hud-section">
     <div class="container">
-      <div class="voice-hud-card" [class.active-listening]="isListening()">
+      <div class="voice-hud-card">
         <div class="voice-hud-main">
           
-          <!-- Top Row: Voice Controls & Real-Time Audio Proof -->
-          <div class="voice-controls-row">
-            <div class="voice-status-group">
-              <button
-                type="button"
-                class="btn-voice-toggle"
-                [class.is-recording]="isListening()"
-                (click)="toggleSpeechListening()">
-                @if (isListening()) {
-                  <span class="pulse-dot"></span>
-                  <span>🔴 กำลังดักฟังเสียง (กดเพื่อหยุด)</span>
-                } @else {
-                  <span>🎤 เปิดระบบดักฟังเสียงคำถาม (Auto-Search)</span>
-                }
-              </button>
-
-              <!-- Live Audio Detection Badge (บอกชัดเจนว่าอัดเสียงติดหรือไม่) -->
-              <div class="mic-status-pill" [class.sound-active]="isListening() && isSoundDetected()" [class.waiting]="isListening() && !isSoundDetected()">
-                @if (isListening() && isSoundDetected()) {
-                  <span class="live-pulse-green"></span>
-                  <strong>🟢 อัดเสียงติดแล้ว! (ตรวจพบเสียงสด)</strong>
-                } @else if (isListening()) {
-                  <span class="live-pulse-yellow"></span>
-                  <span>🟡 ไมค์เปิดอยู่ รอรับเสียง... (ลองพูดคีย์เวิร์ด)</span>
-                } @else {
-                  <span>⚪ ไมค์ปิดอยู่ (กดปุ่มเปิดเพื่อเริ่ม)</span>
-                }
-              </div>
-
-              <!-- Animated Sound Wave VU Meter -->
-              @if (isListening()) {
-                <div class="sound-wave-bars" [class.animated]="micVolumeLevel() > 6 || speechTranscript()">
-                  <span class="sound-bar bar-1" [style.height.px]="4 + (micVolumeLevel() * 0.25)"></span>
-                  <span class="sound-bar bar-2" [style.height.px]="6 + (micVolumeLevel() * 0.35)"></span>
-                  <span class="sound-bar bar-3" [style.height.px]="10 + (micVolumeLevel() * 0.45)"></span>
-                  <span class="sound-bar bar-4" [style.height.px]="6 + (micVolumeLevel() * 0.35)"></span>
-                  <span class="sound-bar bar-5" [style.height.px]="4 + (micVolumeLevel() * 0.25)"></span>
-                  <span class="sound-vol-text">{{ micVolumeLevel() }}%</span>
-                </div>
-              }
-            </div>
-
-            <!-- Right: Explainer Guide Button & Time -->
-            <div class="voice-right-controls">
-              @if (lastSoundTime()) {
-                <span class="last-sound-time">จับเสียงล่าสุด: {{ lastSoundTime() }}</span>
-              }
-              <button type="button" class="btn-how-it-works" (click)="toggleHowItWorks()">
-                💡 ดักเสียงอาจารย์ยังไง? (กดดู)
-              </button>
-            </div>
-          </div>
-
-          <!-- COLLAPSIBLE GUIDE: HOW AUDIO INTERCEPTION WORKS WITH ZOOM -->
-          @if (showHowItWorks()) {
-            <div class="how-it-works-box animate-fade-in">
-              <div class="how-header">
-                <h4>💡 เทคนิคการใช้ระบบดักเสียงคู่กับ Zoom Meeting (เลือกใช้ตามความสะดวก 4 วิธี)</h4>
-                <button type="button" class="btn-close-how" (click)="showHowItWorks.set(false)">✕ ปิดคำแนะนำ</button>
-              </div>
-              <div class="how-grid">
-                <div class="how-card">
-                  <div class="how-num">1</div>
-                  <h5>เปิดเสียง Zoom ออกลำโพงคอม (แนะนำที่สุด & จับเสียงสด)</h5>
-                  <p>ตั้งค่า Audio ใน Zoom ให้เสียงออก <strong>"Speakers (ลำโพงคอม)"</strong> แล้วกดเปิดไมค์ในเว็บนี้ เมื่ออาจารย์พูดผ่าน Zoom เสียงจากลำโพงจะวิ่งเข้าไมค์คอมพิวเตอร์ ให้เว็บถอดคำถามและดึงคำตอบขึ้นมาสดๆ อัตโนมัติ</p>
-                </div>
-                <div class="how-card">
-                  <div class="how-num">2</div>
-                  <h5>จัดหน้าจอ Split Screen ใต้รูกล้อง (เทคนิคตาไม่หลุดโฟกัส)</h5>
-                  <p>วางหน้าต่าง Zoom ไว้ด้านบนจอใกล้กับรูกล้อง Webcam และวางเว็บ "พร้อมเสมอ" ไว้ด้านล่าง เวลาอ่านโพย 3 ประโยคทอง สายตาจะเสมือนมองกล้องตลอดเวลา ดูมั่นใจเป็นธรรมชาติ 100%</p>
-                </div>
-                <div class="how-card">
-                  <div class="how-num">3</div>
-                  <h5>ถ้าใส่หูฟังใน Zoom ให้ "ทวนคำถามอาจารย์สั้นๆ"</h5>
-                  <p>หากจำเป็นต้องเสียบหูฟัง ไมค์คอมจะไม่ได้ยินเสียงในหู ให้ใช้วิธี <strong>"พูดทวนคำถาม"</strong> เช่น <em>"อาจารย์ถามเรื่องโปรเจกต์ Smart Light ใช่ไหมครับ..."</em> หรือ <em>"เรื่อง Relay 220V ใช่ไหมครับ..."</em> ไมค์จะจับเสียงปากเราแล้วเด้งคำตอบขึ้นมาทันที!</p>
-                </div>
-                <div class="how-card">
-                  <div class="how-num">4</div>
-                  <h5>ปุ่มลัดคลิกเดียว (เร็วที่สุด 0.1 วินาที ชัวร์ 100%)</h5>
-                  <p>กดปุ่มคีย์เวิร์ดด้านล่าง เช่น <strong>[แนะนำตัว] [ทำไมเลือก มทร.] [Smart Light] [ฝึกงาน 2 แห่ง] [เกรด 3.61]</strong> คำตอบจะเด้งขึ้นมาใน 0.1 วินาที ไม่ต้องลุ้นเสียงสะท้อน</p>
-                </div>
-              </div>
-            </div>
-          }
-
-          <!-- Error Alert / Permission Hint -->
-          @if (speechError()) {
-            <div class="speech-error-box animate-fade-in">
-              <p>{{ speechError() }}</p>
-            </div>
-          }
-
-          <!-- Real-Time Live Transcript Display (ข้อความที่ไมค์ได้ยินสด) -->
-          @if (speechTranscript()) {
-            <div class="transcript-box animate-fade-in" [class.has-sound]="isSoundDetected()">
-              <div class="transcript-header-row">
-                <div class="transcript-header-left">
-                  <span class="transcript-tag">🗣️ ข้อความที่ไมค์ได้ยินสด:</span>
-                  <span class="transcript-confirmed">🟢 อัดเสียงติดแล้ว (กำลังจับคำตอบ)</span>
-                </div>
-                <button type="button" class="btn-clear-transcript" (click)="clearSpeechData()">✕ ล้าง</button>
-              </div>
-              <div class="transcript-body-row">
-                <p class="transcript-content">"{{ speechTranscript() }}"</p>
-              </div>
-            </div>
-          }
-
-          <!-- 1-CLICK QUICK SHORTCUT CHIPS (ปุ่มลัดคลิกเดียว เรียงตามความสำคัญจากมากไปน้อย!) -->
+          <!-- 1-CLICK QUICK SHORTCUT CHIPS (เรียงตามลำดับความสำคัญ กะทัดรัด ไม่กินพื้นที่) -->
           <div class="quick-chips-wrapper">
-            <span class="chips-label">⚡ ปุ่มลัดคลิกเดียว (เรียงตามลำดับความสำคัญ ชี้ชะตา ➡️ สกิล ➡️ ทัศนคติ ➡️ ปิดท้าย):</span>
+            <span class="chips-label">⚡ ปุ่มลัดคลิกเดียว ดึงคำตอบขึ้นมาทันที (เรียงจากสำคัญมาก ➡️ ปิดท้าย):</span>
+            <div class="chips-list">
+              <!-- Tier 1: ด่วนที่สุด ชี้ชะตา 100% -->
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(1)">👤 1. แนะนำตัว (100%)</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(3)">✅ 3. ถ้าติดเอาไหม (100%)</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(5)">💻 5. หน้าที่ทำเว็บ 100%</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(4)">💡 4. All Light Web App</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี (ไม่มีงานประจำ)</button>
 
-            <!-- TIER 1: ด่วนที่สุด ชี้ชะตา 100% -->
-            <div class="chips-tier-row tier-1-row">
-              <span class="tier-pill-label tier-1-pill">🔴 ด่วนที่สุด (ชี้ชะตา):</span>
-              <div class="chips-list">
-                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(1)">👤 1. แนะนำตัว (100%)</button>
-                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(3)">✅ 3. ถ้าติดเอาไหม (100%)</button>
-                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(5)">💻 5. หน้าที่ทำเว็บ 100%</button>
-                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(4)">💡 4. All Light Web App</button>
-                <button type="button" class="chip-action chip-tier-1" (click)="selectQuickKeyword(9)">⏰ 9. เรียน 3 ปี (ไม่มีงานประจำ)</button>
-              </div>
-            </div>
+              <!-- Tier 2: สกิล & วิชาการ -->
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(7)">🌐 7. ภาษาเขียนเว็บ (Angular/TS)</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(8)">📐 8. เกรด 3.61/เลขคำนวณ</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(2)">🏫 2. ทำไมเลือก มทร. (100%)</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(15)">📚 15. วิศวะคอมฯ เรียนอะไร</button>
 
-            <!-- TIER 2: สกิลเทคนิค & วิชาการ -->
-            <div class="chips-tier-row tier-2-row">
-              <span class="tier-pill-label tier-2-pill">🟠 สกิล & วิชาการ:</span>
-              <div class="chips-list">
-                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(7)">🌐 7. ภาษาเขียนเว็บ (Angular/TS)</button>
-                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(8)">📐 8. เกรด 3.61/เลขคำนวณ</button>
-                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(2)">🏫 2. ทำไมเลือก มทร. (100%)</button>
-                <button type="button" class="chip-action chip-tier-2" (click)="selectQuickKeyword(15)">📚 15. วิศวะคอมฯ เรียนอะไร</button>
-              </div>
-            </div>
+              <!-- Tier 3: ทัศนคติ & แก้ปัญหา -->
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(16)">💔 16. ถ้าไม่ได้เข้าที่นี่</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(14)">⚖️ 14. ข้อดี - ข้อเสีย</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(11)">⚠️ 11. เจอปัญหายาก/ติด F</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(10)">🎯 10. IoT Engineer (อาชีพ)</button>
 
-            <!-- TIER 3: ทัศนคติ & แก้ปัญหา -->
-            <div class="chips-tier-row tier-3-row">
-              <span class="tier-pill-label tier-3-pill">🟡 ทัศนคติ & แก้ปัญหา:</span>
-              <div class="chips-list">
-                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(16)">💔 16. ถ้าไม่ได้เข้าที่นี่</button>
-                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(14)">⚖️ 14. ข้อดี - ข้อเสีย</button>
-                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(11)">⚠️ 11. เจอปัญหายาก/ติด F</button>
-                <button type="button" class="chip-action chip-tier-3" (click)="selectQuickKeyword(10)">🎯 10. IoT Engineer (อาชีพ)</button>
-              </div>
-            </div>
+              <!-- Tier 4: ปิดท้าย & กิจกรรม -->
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(12)">❓ 12. ถามอาจารย์ (ปิดท้าย)</button>
+              <button type="button" class="chip-action" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน 2 แห่ง</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(17)">🤝 17. กิจกรรม & ROV</button>
+              <button type="button" class="chip-action chip-hot" (click)="selectQuickKeyword(13)">📜 13. เกียรติบัตร (5 ใบ)</button>
 
-            <!-- TIER 4: ถามอาจารย์ & กิจกรรมเก็บแต้ม -->
-            <div class="chips-tier-row tier-4-row">
-              <span class="tier-pill-label tier-4-pill">🟢 ถามอาจารย์ & กิจกรรม:</span>
-              <div class="chips-list">
-                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(12)">❓ 12. ถามอาจารย์ (ปิดท้าย)</button>
-                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(6)">🏢 6. ฝึกงาน 2 แห่ง</button>
-                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(17)">🤝 17. กิจกรรม & ROV</button>
-                <button type="button" class="chip-action chip-tier-4" (click)="selectQuickKeyword(13)">📜 13. เกียรติบัตร (5 ใบ)</button>
-              </div>
-            </div>
-
-            <!-- TIER 5: บอท AI สรุปบทตอบ 3 ประโยค -->
-            <div class="chips-tier-row tier-ai-row">
-              <span class="tier-pill-label tier-ai-pill">🤖 ผู้ช่วย AI ช่วยตอบสด:</span>
-              <div class="chips-list">
-                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Angular')">🅰️ Angular & PWA</button>
-                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('All Light')">💡 All Light 3 โหมด</button>
-                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('API')">⚡ REST API & Real-time</button>
-                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Cybersecurity')">📜 อบรม Cyber & Crypto</button>
-                <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('จิตอาสา')">🤝 จิตอาสา & eSports</button>
-              </div>
+              <!-- Tier 5: บอท AI สรุปบทตอบ -->
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Angular')">🅰️ Angular & PWA</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('All Light')">💡 All Light 3 โหมด</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('API')">⚡ REST API & Real-time</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('Cybersecurity')">📜 อบรม Cyber & Crypto</button>
+              <button type="button" class="chip-action chip-ai-pill" (click)="askAiAssistant('จิตอาสา')">🤝 จิตอาสา & eSports</button>
             </div>
           </div>
         </div>
